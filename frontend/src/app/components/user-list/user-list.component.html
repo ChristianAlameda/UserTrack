@@ -1,0 +1,132 @@
+<div class="container my-5">
+    <h1 class="text-center mb-4">User Management</h1>
+    <!-- List of All Users -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h2 class="h4">All Users</h2>
+      </div>
+      <div class="card-body">
+        <button class="btn btn-primary" (click)="getAllUsers()">Refresh Users</button>
+        <ul class="list-group">
+          <li *ngFor="let user of allUsers" class="list-group-item">
+            <strong>{{ user.firstName }} {{ user.lastName }}</strong>
+            <span class="text-muted">({{ user.email }})</span>
+            <span class="text-info float-end">Created At: {{ user.createdAt | date:'short' }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Add User Form -->
+    <div class="card mb-4">
+      <div class="card-header">
+          <h2 class="h4">Add User</h2>
+      </div>
+      <div class="card-body">
+          <form (submit)="addUser(firstNameInput.value, lastNameInput.value, emailInput.value)">
+              <div class="mb-3">
+                  <input #firstNameInput type="text" id="firstName" class="form-control" placeholder="Enter First Name" required />
+              </div>
+              <div class="mb-3">
+                  <input #lastNameInput type="text" id="lastName" class="form-control" placeholder="Enter Last Name" required />
+              </div>
+              <div class="mb-3">
+                  <input #emailInput type="email" id="email" class="form-control" placeholder="Enter Email" required />
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Add User</button>
+          </form>
+      </div>
+    </div>
+
+    <!-- Delete Users -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h2 class="h4">Delete Users</h2>
+      </div>
+      <div class="card-body">
+        <div class="input-group mb-3">
+          <input #firstName2 type="text" class="form-control" placeholder="Enter first name" />
+          <button class="btn btn-success" (click)="getUserByFirstName(firstName2.value)">Search</button>
+        </div>
+        <ul class="list-group">
+          @for(user of searchResults; track user){
+            <li class="list-group-item">
+              <strong>{{ user.firstName }} {{ user.lastName }}</strong>
+              <span class="text-muted">({{ user.email }})</span>
+              <span class="text-info float-end">Created At: {{ user.createdAt | date:'short' }}</span>
+              @if(user.id){
+                <button class="btn btn-danger float-end" (click)="deleteUser(user.id)">Delete User</button>
+              }
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+
+    <!-- Get user by email -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h2 class="h4">Get User By Email</h2>
+      </div>
+      <div class="card-body">
+        <div class="input-group mb-3">
+          <input #emailInput1 type="email" class="form-control" placeholder="Enter email" /> <!-- type="email" -->
+          <button class="btn btn-success" (click)="getUserByEmail(emailInput1.value)">Get User</button><!-- emailInput.value -->
+        </div>
+        <ul class="list-group">
+          @if (user) {
+            <li class="list-group-item">
+              <strong>{{ user.firstName }} {{ user.lastName }} </strong> 
+              <span class="text-muted">({{ user.email }})</span> 
+              <span class="text-info float-end">Created At: {{ user.createdAt}}</span>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+    
+  
+    <!-- Get Users By Date -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h2 class="h4">Get Users By Date</h2>
+      </div>
+      <div class="card-body">
+        <div class="input-group mb-3">
+          <input #dateInput type="datetime-local" class="form-control" placeholder="Enter date" />
+          <button class="btn btn-success" (click)="getUsersByDate(dateInput.value)">Get Users</button>
+        </div>
+        <ul class="list-group">
+          @for (user of filteredUsers; track user) {
+            <li class="list-group-item">
+              <strong>{{ user.firstName }} {{ user.lastName }} </strong> 
+              <span class="text-muted">({{ user.email }})</span> 
+              <span class="text-info float-end">Created At: {{ user.createdAt}}</span>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  
+    <!-- Count Users By Last Name -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h2 class="h4">Count Users By Last Name</h2>
+      </div>
+      <div class="card-body">
+        <div class="input-group mb-3">
+          <input #lastNameInput1 type="text" class="form-control" placeholder="Enter last name" />
+          <button class="btn btn-success" (click)="getCountByLastName(lastNameInput1.value)">Count Users</button>
+        </div>
+        @if (count && lastName) {
+          @if (count === 1){
+            <strong>{{lastName}} was seen in our database {{count}} time!</strong> 
+          }
+          @if (count > 1){
+            <strong>{{lastName}} was seen in our database {{count}} times!</strong> 
+          }
+        }
+      </div>
+    </div>
+  </div>
+  
