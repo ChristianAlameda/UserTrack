@@ -17,13 +17,14 @@
       </div>
     </div>
 
-    <!-- Add User Form -->
+    <!-- Add User and Student Form -->
     <div class="card mb-4">
       <div class="card-header">
-          <h2 class="h4">Add User</h2>
+          <h2 class="h4">Add User and Student</h2>
       </div>
       <div class="card-body">
-          <form (submit)="addUser(firstNameInput.value, lastNameInput.value, emailInput.value)">
+          <form (submit)="addUserAndStudent(firstNameInput.value, lastNameInput.value, emailInput.value, classNameInput.value, gradeInput.value, scheduleInput.value)">
+              <!-- User Information -->
               <div class="mb-3">
                   <input #firstNameInput type="text" id="firstName" class="form-control" placeholder="Enter First Name" required />
               </div>
@@ -33,10 +34,24 @@
               <div class="mb-3">
                   <input #emailInput type="email" id="email" class="form-control" placeholder="Enter Email" required />
               </div>
-              <button type="submit" class="btn btn-primary w-100">Add User</button>
+
+              <!-- Student Information -->
+              <div class="mb-3">
+                  <input #classNameInput type="text" id="className" class="form-control" placeholder="Enter Class Name" required />
+              </div>
+              <div class="mb-3">
+                  <input #gradeInput type="text" id="grade" class="form-control" placeholder="Enter Grade (e.g., A, B+)" maxlength="2" required />
+              </div>
+              <div class="mb-3">
+                  <input #scheduleInput type="text" id="schedule" class="form-control" placeholder="Enter Schedule (e.g., Mon-Wed 9:00-10:30 AM)" required />
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn btn-primary w-100">Add User and Student</button>
           </form>
       </div>
     </div>
+
 
     <!-- Delete Users -->
     <div class="card mb-4">

@@ -8,14 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entity.Student;
 import com.example.demo.entity.User;
+import com.example.demo.repository.StudentRepository;
 import com.example.demo.repository.UserRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private StudentRepository studentRepository;
 
     public List<User> getAllUsers(){
         return userRepository.findAll();
@@ -25,9 +32,23 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
-    public User addUser(User user){
-        return userRepository.save(user);
+    // public User addUser(User user){
+    //     return userRepository.save(user);
+    // }
+
+    @Transactional  // Ensures both user and student are saved together or rolled back in case of an error
+    public void addUserAndStudent(User user, Student student) {
+        // Step 1: Save the user
+        User savedUser = userRepository.save(user);
+
+        // Step 2: Set the userId for the student
+        student.setUserId(savedUser.getId());
+
+        // Step 3: Save the student
+        studentRepository.save(student);
     }
+
+    
 
     public void deleteUser(Long id){
         userRepository.deleteById(id);
@@ -57,10 +78,6 @@ public class UserService {
     public long countByLastName(String lastName){
         return userRepository.countByLastName(lastName);
     }
-    
-    // public void deleteByEmail(String email) {
-    //     userRepository.deleteByEmail(email);
-    // }
     
 
 }

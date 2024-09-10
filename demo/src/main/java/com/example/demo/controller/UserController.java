@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entity.Student;
 import com.example.demo.entity.User;
+import com.example.demo.entity.UserStudentDTO;
 import com.example.demo.service.UserService;
 
 import jakarta.websocket.server.PathParam;
@@ -39,9 +41,28 @@ public class UserController {
         return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
     }
 
-    @PostMapping
-    public User addUser(@RequestBody User user){
-        return userService.addUser(user);
+    // @PostMapping
+    // public User addUser(@RequestBody User user){
+    //     return userService.addUser(user);
+    // }
+    @PostMapping("/add")
+    public String addUserAndStudent(@RequestBody UserStudentDTO userStudentDTO) {
+        // Create User and Student objects from DTO
+        User user = new User();
+        user.setEmail(userStudentDTO.getEmail());
+        user.setFirstName(userStudentDTO.getFirstName());
+        user.setLastName(userStudentDTO.getLastName());
+        // user.setCreatedAt(new java.sql.Timestamp(System.currentTimeMillis()));
+
+        Student student = new Student();
+        student.setClassName(userStudentDTO.getClassName());
+        student.setGrade(userStudentDTO.getGrade());
+        student.setSchedule(userStudentDTO.getSchedule());
+
+        // Call the service to add user and student
+        userService.addUserAndStudent(user, student);
+
+        return "User and Student added successfully";
     }
 
     @DeleteMapping("/{id}")

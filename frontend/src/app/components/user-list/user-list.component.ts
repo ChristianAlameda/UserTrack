@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../user.model';
 import { UserService } from '../../services/user.service';
+import { userStudent } from '../../userStudent.model';
 
 @Component({
   selector: 'app-user-list',
@@ -47,18 +48,20 @@ export class AppUserListComponent implements OnInit {
     });
   }
 
-  // Add a new user
-  addUser(firstName: string, lastName: string, email: string): void {
-    const newUser: User = {
+  // Add a new user and student
+  addUserAndStudent(firstName: string, lastName: string, email: string, className: string, grade: string, schedule: string): void {
+    const newUserStudent: userStudent = {
       firstName: firstName,
       lastName: lastName,
       email: email,
-      createdAt: new Date() 
+      className: className,
+      grade: grade,
+      schedule: schedule
     };
 
-    this.userService.addUser(newUser).subscribe(addedUser => {
-      console.log('User added:', addedUser);
-      this.getAllUsers(); 
+    this.userService.addUserAndStudent(newUserStudent).subscribe(response => {
+      console.log('User and Student added:', response);
+      this.getAllUsers();  // Refresh users after adding
     });
   }
 
