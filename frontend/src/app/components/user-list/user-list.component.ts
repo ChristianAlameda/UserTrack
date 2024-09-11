@@ -18,7 +18,9 @@ export class AppUserListComponent implements OnInit {
   lastName: string = '';
   searchResults: User[] = [];
   userTypes: string[] = ['User', 'UserStudent', 'UserAthlete', 'UserStudentAthlete'];  
-  inputValue: string = '';
+  inputValue: string = 'User';
+  emailOrDates: string[] = ['Email', 'Date'];  
+  emailOrDateValue: string = 'Email';
 
   constructor(private userService: UserService) {}
 

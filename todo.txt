@@ -1,0 +1,5 @@
+ALLusers should have a slider to see athletes, students, and all users
+
+disallow a user addition with the same email
+
+add a way to actually input your schedule
