@@ -1,14 +1,13 @@
 export interface UserStudentAthlete {
-    firstName: String;
-    lastName: String;
-    email: String;
-    className: String;
-    grade: String;
-    student_schedule: String;
+    firstName: string;
+    lastName: string;
+    email: string;
+    className: string;
+    grade: string;
+    studentSchedule: string;
     speed: number;
     height: number;
     weight: number;
-    star_rating: number;
-    athlete_schedule: string;
+    starRating: number;
+    athleteSchedule: string;
 }
-

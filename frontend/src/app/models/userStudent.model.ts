@@ -4,5 +4,5 @@ export interface UserStudent {
     email: String;
     className: String;
     grade: String;
-    student_schedule: String;
+    studentSchedule: String;  // Use camelCase
 }

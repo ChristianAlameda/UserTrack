@@ -10,7 +10,6 @@ import { UserStudentAthlete } from '../../models/userStudentAthlete.model';
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss'],
 })
-
 export class AppUserListComponent implements OnInit {
   allUsers: User[] = []; 
   filteredUsers: User[] = []; 
@@ -22,6 +21,7 @@ export class AppUserListComponent implements OnInit {
   inputValue: string = '';
 
   constructor(private userService: UserService) {}
+
   ngOnInit(): void {
     this.getAllUsers();
   }
@@ -35,7 +35,7 @@ export class AppUserListComponent implements OnInit {
 
   getUserByEmail(email: string): void {
     this.userService.getUserByEmail(email).subscribe(data => {
-      this.user = data;
+      this.filteredUsers = data;
     });
   }
 
@@ -51,7 +51,7 @@ export class AppUserListComponent implements OnInit {
       this.lastName = lastName;
     });
   }
-  
+
   // Add user
   addUser(firstName: string, lastName: string, email: string) {
     const newUser: User = {
@@ -66,9 +66,17 @@ export class AppUserListComponent implements OnInit {
     });
   }
 
-  //add user and anthlete
-  addUserAthlete(firstName: String, lastName: String, email: String, 
-    speed: number, height: number, weight: number, star_rating: number,athlete_schedule: string) {
+  // Add user and athlete
+  addUserAthlete(
+    firstName: string, 
+    lastName: string, 
+    email: string, 
+    speed: number, 
+    height: number, 
+    weight: number, 
+    starRating: number, 
+    athleteSchedule: string
+  ) {
     const newUserAthlete: UserAthlete = {
       firstName: firstName,
       lastName: lastName,
@@ -76,8 +84,8 @@ export class AppUserListComponent implements OnInit {
       speed: speed,
       height: height,
       weight: weight,
-      star_rating: star_rating,
-      athlete_schedule: athlete_schedule,
+      starRating: starRating,
+      athleteSchedule: athleteSchedule,
     };
     console.log('newUserAthlete', newUserAthlete, 1);
 
@@ -86,7 +94,7 @@ export class AppUserListComponent implements OnInit {
       this.getAllUsers();  // Refresh users after adding
     });
   }
-  
+
   // Add a new user and student
   addUserStudent(
     firstName: string, 
@@ -94,14 +102,15 @@ export class AppUserListComponent implements OnInit {
     email: string, 
     className: string, 
     grade: string, 
-    student_schedule: string): void {
+    studentSchedule: string
+  ): void {
     const newUserStudent: UserStudent = {
       firstName: firstName,
       lastName: lastName,
       email: email,
       className: className,
       grade: grade,
-      student_schedule: student_schedule
+      studentSchedule: studentSchedule
     }; 
     console.log(newUserStudent);
 
@@ -111,6 +120,7 @@ export class AppUserListComponent implements OnInit {
     });
   }
 
+  // Add a new user, student, and athlete
   addUserStudentAthlete(
     firstName: string, 
     lastName: string, 
@@ -121,7 +131,7 @@ export class AppUserListComponent implements OnInit {
     speed: number, 
     height: number, 
     weight: number, 
-    star_rating: number, 
+    starRating: number, 
     athleteSchedule: string
   ) {
     const newUserStudentAthlete: UserStudentAthlete = {
@@ -132,23 +142,22 @@ export class AppUserListComponent implements OnInit {
       // Student
       className: className, 
       grade: grade,
-      student_schedule: studentSchedule,
+      studentSchedule: studentSchedule,
       // Athlete
       speed: speed,
       height: height,
       weight: weight,
-      star_rating: star_rating,
-      athlete_schedule: athleteSchedule,
+      starRating: starRating,
+      athleteSchedule: athleteSchedule,
     };
-    
+
     console.log('xx');
-    
+
     this.userService.addUserStudentAthlete(newUserStudentAthlete).subscribe(response => {
       console.log('User and Athlete added:', response);
       this.getAllUsers();  // Refresh users after adding
     });
   }
-  
 
   deleteUser(id: number): void {
     this.userService.deleteUser(id).subscribe(() => {

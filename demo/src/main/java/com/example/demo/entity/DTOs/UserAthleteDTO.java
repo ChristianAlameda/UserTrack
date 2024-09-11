@@ -5,14 +5,16 @@ public class UserAthleteDTO {
     private String email;
     private String firstName;
     private String lastName;
-    // Athletes
+
+    // Athlete
     private int speed;
     private int height;
     private int weight;
     private int starRating;
     private String athleteSchedule;
 
-    public UserAthleteDTO(){}
+    public UserAthleteDTO() {}
+
     public UserAthleteDTO(
         String email,
         String firstName,
@@ -22,11 +24,10 @@ public class UserAthleteDTO {
         int weight,
         int starRating,
         String athleteSchedule
-    ){
+    ) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        
         this.speed = speed;
         this.height = height;
         this.weight = weight;

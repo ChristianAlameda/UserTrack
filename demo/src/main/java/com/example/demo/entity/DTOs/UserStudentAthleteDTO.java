@@ -13,7 +13,8 @@ public class UserStudentAthleteDTO {
     private int starRating;
     private String athleteSchedule;
 
-    public UserStudentAthleteDTO(){}
+    public UserStudentAthleteDTO() {}
+
     public UserStudentAthleteDTO(
         String email,
         String firstName,
@@ -26,7 +27,7 @@ public class UserStudentAthleteDTO {
         int weight,
         int starRating,
         String athleteSchedule
-    ){
+    ) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -39,6 +40,7 @@ public class UserStudentAthleteDTO {
         this.starRating = starRating;
         this.athleteSchedule = athleteSchedule;
     }
+
     // Getters and Setters
     public String getEmail() {
         return email;

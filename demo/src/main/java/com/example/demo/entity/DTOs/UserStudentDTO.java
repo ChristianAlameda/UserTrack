@@ -8,15 +8,16 @@ public class UserStudentDTO {
     private String grade;
     private String studentSchedule;
 
-    UserStudentDTO(){}
-    UserStudentDTO(
+    public UserStudentDTO() {}
+
+    public UserStudentDTO(
         String email,
         String firstName,
         String lastName,
         String className,
         String grade,
-        String studentSchedule)
-    {
+        String studentSchedule
+    ) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -74,4 +75,3 @@ public class UserStudentDTO {
         this.studentSchedule = studentSchedule;
     }
 }
-

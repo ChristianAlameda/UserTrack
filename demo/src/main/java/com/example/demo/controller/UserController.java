@@ -47,6 +47,7 @@ public class UserController {
     // adds user: good
     @PostMapping("/addUser")
     public User addUser(@RequestBody User user){
+        System.out.printf("user", user, 1);
         return userService.addUser(user);
     }
 
@@ -60,12 +61,11 @@ public class UserController {
         user.setLastName(userStudentDTO.getLastName());
         // user.setCreatedAt(new java.sql.Timestamp(System.currentTimeMillis()));
 
-        System.out.println("x");
 
         Student student = new Student();
         student.setClassName(userStudentDTO.getClassName());
         student.setGrade(userStudentDTO.getGrade());
-        student.setStudentSchedule("MWF 2-4");//"MWF 2-4" // userStudentDTO.getStudentSchedule() 
+        student.setStudentSchedule(userStudentDTO.getStudentSchedule());//"MWF 2-4" // userStudentDTO.getStudentSchedule() 
         
         System.out.println("xx");
 
@@ -89,7 +89,7 @@ public class UserController {
         athlete.setHeight(userAthleteDTO.getHeight());
         athlete.setWeight(userAthleteDTO.getWeight());
         athlete.setStarRating(userAthleteDTO.getStarRating());
-        athlete.setAthleteSchedule("MWF 2-4"); //"MWF 2-4" //userAthleteDTO.getAthleteSchedule()
+        athlete.setAthleteSchedule(userAthleteDTO.getAthleteSchedule()); //"MWF 2-4" //userAthleteDTO.getAthleteSchedule()
 
         System.out.printf("userAthleteDTO", userAthleteDTO.getAthleteSchedule(), 3);
 
@@ -136,8 +136,8 @@ public class UserController {
 
     // Get a user by email
     @GetMapping("/email/{email}")
-    public ResponseEntity<User> getUserByEmail(@PathVariable String email){
-        User user = userService.findByEmail(email);
+    public ResponseEntity<List<User>> getUserByEmail(@PathVariable String email){
+        List<User> user = userService.findByEmail(email);
         return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
     } 
 
@@ -160,7 +160,7 @@ public class UserController {
     // Get a user by email
     @GetMapping("/byEmail")
     public ResponseEntity<List<User>> getUsersByPartialEmail(@RequestParam String email) {
-        List<User> users = userService.findUsersByPartialEmail(email);
+        List<User> users = userService.findByEmailLike(email);
         return users != null && !users.isEmpty() ? ResponseEntity.ok(users) : ResponseEntity.notFound().build();
     }
 

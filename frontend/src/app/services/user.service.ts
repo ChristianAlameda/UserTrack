@@ -43,8 +43,8 @@ export class UserService {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 
-  getUserByEmail(email: string): Observable<User>{
-    return this.http.get<User>(`${this.baseUrl}/email/${email}`);
+  getUserByEmail(email: string): Observable<User[]>{
+    return this.http.get<User[]>(`${this.baseUrl}/email/${email}`);
   }
 
   getUserByFirstName(firstName: string): Observable<User[]>{

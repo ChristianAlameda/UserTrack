@@ -1,7 +1,6 @@
 package com.example.demo.entity;
 
 import java.time.LocalDateTime;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,12 +20,13 @@ public class User {
     private String lastName;
     private String email;
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    // Constructors, getters, and setters
+    // Default constructor
     public User() {}
 
+    // Parameterized constructor
     public User(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,6 +34,7 @@ public class User {
         this.createdAt = LocalDateTime.now();
     }
 
+    // Getters and setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

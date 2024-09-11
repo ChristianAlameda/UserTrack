@@ -83,16 +83,12 @@ public class UserService {
         athleteRepository.save(athlete);
     }
 
-    
-
-    
-
     public void deleteUser(Long id){
         userRepository.deleteById(id);
     }
 
     // additional
-    public User findByEmail(String email){
+    public List<User> findByEmail(String email){
         return userRepository.findByEmail(email);
     }
 
@@ -104,7 +100,7 @@ public class UserService {
         return userRepository.findByFirstNameAndLastName(firstName, lastName);
     }
 
-    public List<User> findUsersByPartialEmail(String email) {
+    public List<User> findByEmailLike(String email) {
         return userRepository.findByEmailLike(email);
     }
 

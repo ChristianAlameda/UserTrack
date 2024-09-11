@@ -1,9 +1,9 @@
 export interface Athlete {
     id?: number;
-    user_id?: number; 
+    userId?: number; 
     speed: number;
     height: number;
     weight: number;
-    star_rating: number;
-    athlete_schedule: string;
+    starRating: number;
+    athleteSchedule: string;
 }

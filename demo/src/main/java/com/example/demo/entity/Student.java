@@ -15,36 +15,40 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long user_id;
-    private String class_name;
+    @Column(name = "user_id")
+    private Long userId;
+
+    @Column(name = "class_name")
+    private String className;
+
     private String grade;
 
     @Column(name = "student_schedule", nullable = false)
-    private String student_schedule;
+    private String studentSchedule;
 
     // Constructors, getters, and setters
     public Student() {}
 
-    public Student(Long user_id, String class_name, String grade, String student_schedule){
-        this.user_id = user_id;
-        this.class_name = class_name; 
+    public Student(Long userId, String className, String grade, String studentSchedule) {
+        this.userId = userId;
+        this.className = className; 
         this.grade = grade;
-        this.student_schedule = student_schedule;
+        this.studentSchedule = studentSchedule;
     }
 
     // Getters and Setters
-    public Long getId(){ return this.id;}
-    public void setId(Long id){this.id = id;}
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getUserId(){ return this.user_id;}
-    public void setUserId(Long user_id){this.user_id = user_id;}
+    public Long getUserId() { return userId; }
+    public void setUserId(Long userId) { this.userId = userId; }
 
-    public String getClassName(){ return this.class_name;}
-    public void setClassName(String class_name){ this.class_name = class_name;}
+    public String getClassName() { return className; }
+    public void setClassName(String className) { this.className = className; }
 
-    public String getGrade(){ return this.grade;}
-    public void setGrade(String grade){ this.grade = grade;}
+    public String getGrade() { return grade; }
+    public void setGrade(String grade) { this.grade = grade; }
 
-    public String getStudentSchedule(){ return this.student_schedule;}
-    public void setStudentSchedule(String student_schedule){this.student_schedule = student_schedule;}
+    public String getStudentSchedule() { return studentSchedule; }
+    public void setStudentSchedule(String studentSchedule) { this.studentSchedule = studentSchedule; }
 }

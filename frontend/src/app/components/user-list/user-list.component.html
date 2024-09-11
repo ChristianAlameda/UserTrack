@@ -20,7 +20,7 @@
     <!-- Add User and Student Form -->
     <div class="card mb-4">
       <div class="card-header">
-          <h2 class="h4">Add User and Student</h2>
+          <h2 class="h4">Add {{inputValue}}</h2>
       </div>
 
       <form>
@@ -230,12 +230,15 @@
           <button class="btn btn-success" (click)="getUserByEmail(emailInput1.value)">Get User</button><!-- emailInput.value -->
         </div>
         <ul class="list-group">
-          @if (user) {
-            <li class="list-group-item">
-              <strong>{{ user.firstName }} {{ user.lastName }} </strong> 
-              <span class="text-muted">({{ user.email }})</span> 
-              <span class="text-info float-end">Created At: {{ user.createdAt}}</span>
-            </li>
+          @if (filteredUsers) {
+            @for(filteredUser of filteredUsers; track filteredUser){
+              <li class="list-group-item">
+                <strong>{{ filteredUser.firstName }} {{ filteredUser.lastName }} </strong> 
+                <span class="text-muted">({{ filteredUser.email }})</span> 
+                <span class="text-info float-end">Created At: {{ filteredUser.createdAt}}</span>
+              </li>  
+            }
+            
           }
         </ul>
       </div>

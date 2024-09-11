@@ -20,7 +20,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // You can define custom queries here
 
     //Find a user by email
-    User findByEmail(String email);
+    List<User> findByEmail(String email);
 
     //Find all users with a specific first name
     List<User> findByFirstName(String firstName);
