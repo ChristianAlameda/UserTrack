@@ -11,8 +11,22 @@ CREATE TABLE students (
     user_id BIGINT NOT NULL,  -- Foreign key linking to users table
     class_name VARCHAR(255),
     grade CHAR(2),
-    schedule VARCHAR(255),
+    student_schedule VARCHAR(255),
     CONSTRAINT fk_user
         FOREIGN KEY (user_id) REFERENCES users(id)
         ON DELETE CASCADE
 );
+
+CREATE TABLE athletes (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,  -- Foreign key linking to users table
+    speed INT,                
+    height INT,               
+    weight INT,               
+    star_rating INT,          
+    athlete_schedule VARCHAR(255),
+    CONSTRAINT fk_user_id
+        FOREIGN KEY (user_id) REFERENCES users(id)
+        ON DELETE CASCADE
+);
+

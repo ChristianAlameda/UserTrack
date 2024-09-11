@@ -1,8 +1,10 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '../user.model';
-import { userStudent } from '../userStudent.model';
+import { User } from '../models/user.model';
+import { UserStudent } from '../models/userStudent.model';
+import { UserAthlete } from '../models/userAthlete.model';
+import { UserStudentAthlete } from '../models/userStudentAthlete.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +22,21 @@ export class UserService {
     return this.http.get<User>(`${this.baseUrl}/${id}`);
   }
 
-  addUserAndStudent(newUserStudent: userStudent): Observable<any> {
-    return this.http.post<any>('http://localhost:8080/api/users/add', newUserStudent);
+  addUser(newUser: User): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/addUser`, newUser);
+  }
+
+  addUserStudent(newUserStudent: UserStudent): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/addUserStudent`, newUserStudent);
+  }
+
+  addUserAthlete(newUserAthlete: UserAthlete): Observable<any>{
+    console.log('newUserAthlete', newUserAthlete, 2);
+    return this.http.post<any>(`${this.baseUrl}/addUserAthlete`, newUserAthlete);
+  }
+
+  addUserStudentAthlete(newUserStudentAthlete: UserStudentAthlete): Observable<any>{
+    return this.http.post<any>(`${this.baseUrl}/addUserStudentAthlete`, newUserStudentAthlete);
   }
 
   deleteUser(id: number): Observable<void> {

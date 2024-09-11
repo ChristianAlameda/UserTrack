@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entity.Athlete;
 import com.example.demo.entity.Student;
 import com.example.demo.entity.User;
-import com.example.demo.entity.UserStudentDTO;
+import com.example.demo.entity.DTOs.UserAthleteDTO;
+import com.example.demo.entity.DTOs.UserStudentAthleteDTO;
+import com.example.demo.entity.DTOs.UserStudentDTO;
 import com.example.demo.service.UserService;
 
 import jakarta.websocket.server.PathParam;
@@ -41,12 +44,15 @@ public class UserController {
         return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
     }
 
-    // @PostMapping
-    // public User addUser(@RequestBody User user){
-    //     return userService.addUser(user);
-    // }
-    @PostMapping("/add")
-    public String addUserAndStudent(@RequestBody UserStudentDTO userStudentDTO) {
+    // adds user: good
+    @PostMapping("/addUser")
+    public User addUser(@RequestBody User user){
+        return userService.addUser(user);
+    }
+
+    // adds user student: good
+    @PostMapping("/addUserStudent") 
+    public String addUserStudent(@RequestBody UserStudentDTO userStudentDTO) {
         // Create User and Student objects from DTO
         User user = new User();
         user.setEmail(userStudentDTO.getEmail());
@@ -54,15 +60,72 @@ public class UserController {
         user.setLastName(userStudentDTO.getLastName());
         // user.setCreatedAt(new java.sql.Timestamp(System.currentTimeMillis()));
 
+        System.out.println("x");
+
         Student student = new Student();
         student.setClassName(userStudentDTO.getClassName());
         student.setGrade(userStudentDTO.getGrade());
-        student.setSchedule(userStudentDTO.getSchedule());
+        student.setStudentSchedule("MWF 2-4");//"MWF 2-4" // userStudentDTO.getStudentSchedule() 
+        
+        System.out.println("xx");
 
         // Call the service to add user and student
-        userService.addUserAndStudent(user, student);
+        userService.addUserStudent(user, student);
 
         return "User and Student added successfully";
+    }
+
+    // add user athlete
+    @PostMapping("/addUserAthlete")
+    public String addUserAthlete(@RequestBody UserAthleteDTO userAthleteDTO) {
+
+        User user = new User();
+        user.setEmail(userAthleteDTO.getEmail());
+        user.setFirstName(userAthleteDTO.getFirstName());
+        user.setLastName(userAthleteDTO.getLastName());
+
+        Athlete athlete = new Athlete();
+        athlete.setSpeed(userAthleteDTO.getSpeed());
+        athlete.setHeight(userAthleteDTO.getHeight());
+        athlete.setWeight(userAthleteDTO.getWeight());
+        athlete.setStarRating(userAthleteDTO.getStarRating());
+        athlete.setAthleteSchedule("MWF 2-4"); //"MWF 2-4" //userAthleteDTO.getAthleteSchedule()
+
+        System.out.printf("userAthleteDTO", userAthleteDTO.getAthleteSchedule(), 3);
+
+        // Save the user and athlete
+        userService.addUserAthlete(user, athlete);
+        return "User and Athlete added successfully";
+    }
+
+
+    
+    // adds User Student Athlete
+    @PostMapping("/addUserStudentAthlete") // change this
+    public String addUserStudentAthlete(@RequestBody UserStudentAthleteDTO userStudentAthleteDTO) {
+
+        User user = new User();
+        user.setEmail(userStudentAthleteDTO.getEmail());
+        user.setFirstName(userStudentAthleteDTO.getFirstName());
+        user.setLastName(userStudentAthleteDTO.getLastName());
+        // user.setCreatedAt(new java.sql.Timestamp(System.currentTimeMillis()));
+
+        Student student = new Student();
+        student.setClassName(userStudentAthleteDTO.getClassName());
+        student.setGrade(userStudentAthleteDTO.getGrade());
+        student.setStudentSchedule("MWF 2-4");//"MWF 2-4"//userStudentAthleteDTO.getAthleteSchedule()
+
+        Athlete athlete = new Athlete();
+        athlete.setSpeed(userStudentAthleteDTO.getSpeed());
+        athlete.setHeight(userStudentAthleteDTO.getHeight());
+        athlete.setWeight(userStudentAthleteDTO.getWeight());
+        athlete.setStarRating(userStudentAthleteDTO.getStarRating());
+        athlete.setAthleteSchedule("MWF 2-4");//"MWF 2-4"//userStudentAthleteDTO.getAthleteSchedule()
+
+        // Call the service to add user and student
+        userService.addUserStudentAthlete(user, student, athlete);
+
+        return "User Student Athlete added successfully";
     }
 
     @DeleteMapping("/{id}")

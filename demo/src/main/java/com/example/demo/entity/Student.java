@@ -15,17 +15,22 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id", nullable = false)
     private Long user_id;
-
-    @Column(name = "class_name", length = 255, nullable = false)
     private String class_name;
-
-    @Column(name = "grade", length = 2, nullable = true)
     private String grade;
 
-    @Column(name = "schedule", length = 255, nullable = true)
-    private String schedule;
+    @Column(name = "student_schedule", nullable = false)
+    private String student_schedule;
+
+    // Constructors, getters, and setters
+    public Student() {}
+
+    public Student(Long user_id, String class_name, String grade, String student_schedule){
+        this.user_id = user_id;
+        this.class_name = class_name; 
+        this.grade = grade;
+        this.student_schedule = student_schedule;
+    }
 
     // Getters and Setters
     public Long getId(){ return this.id;}
@@ -40,6 +45,6 @@ public class Student {
     public String getGrade(){ return this.grade;}
     public void setGrade(String grade){ this.grade = grade;}
 
-    public String getSchedule(){ return this.schedule;}
-    public void setSchedule(String schedule){this.schedule = schedule;}
+    public String getStudentSchedule(){ return this.student_schedule;}
+    public void setStudentSchedule(String student_schedule){this.student_schedule = student_schedule;}
 }

@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../user.model';
+import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
-import { userStudent } from '../../userStudent.model';
+import { UserStudent } from '../../models/userStudent.model';
+import { UserAthlete } from '../../models/userAthlete.model';
+import { UserStudentAthlete } from '../../models/userStudentAthlete.model';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss']
+  styleUrls: ['./user-list.component.scss'],
 })
+
 export class AppUserListComponent implements OnInit {
   allUsers: User[] = []; 
   filteredUsers: User[] = []; 
@@ -15,9 +18,10 @@ export class AppUserListComponent implements OnInit {
   count: number = 0;
   lastName: string = '';
   searchResults: User[] = [];
+  userTypes: string[] = ['User', 'UserStudent', 'UserAthlete', 'UserStudentAthlete'];  
+  inputValue: string = '';
 
   constructor(private userService: UserService) {}
-
   ngOnInit(): void {
     this.getAllUsers();
   }
@@ -47,23 +51,104 @@ export class AppUserListComponent implements OnInit {
       this.lastName = lastName;
     });
   }
+  
+  // Add user
+  addUser(firstName: string, lastName: string, email: string) {
+    const newUser: User = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+    };
 
+    this.userService.addUser(newUser).subscribe(response => {
+      console.log('User added:', response);
+      this.getAllUsers();  // Refresh users after adding
+    });
+  }
+
+  //add user and anthlete
+  addUserAthlete(firstName: String, lastName: String, email: String, 
+    speed: number, height: number, weight: number, star_rating: number,athlete_schedule: string) {
+    const newUserAthlete: UserAthlete = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      speed: speed,
+      height: height,
+      weight: weight,
+      star_rating: star_rating,
+      athlete_schedule: athlete_schedule,
+    };
+    console.log('newUserAthlete', newUserAthlete, 1);
+
+    this.userService.addUserAthlete(newUserAthlete).subscribe(response => {
+      console.log('User and Athlete added:', response);
+      this.getAllUsers();  // Refresh users after adding
+    });
+  }
+  
   // Add a new user and student
-  addUserAndStudent(firstName: string, lastName: string, email: string, className: string, grade: string, schedule: string): void {
-    const newUserStudent: userStudent = {
+  addUserStudent(
+    firstName: string, 
+    lastName: string, 
+    email: string, 
+    className: string, 
+    grade: string, 
+    student_schedule: string): void {
+    const newUserStudent: UserStudent = {
       firstName: firstName,
       lastName: lastName,
       email: email,
       className: className,
       grade: grade,
-      schedule: schedule
-    };
+      student_schedule: student_schedule
+    }; 
+    console.log(newUserStudent);
 
-    this.userService.addUserAndStudent(newUserStudent).subscribe(response => {
+    this.userService.addUserStudent(newUserStudent).subscribe(response => {
       console.log('User and Student added:', response);
       this.getAllUsers();  // Refresh users after adding
     });
   }
+
+  addUserStudentAthlete(
+    firstName: string, 
+    lastName: string, 
+    email: string,
+    className: string, 
+    grade: string, 
+    studentSchedule: string,
+    speed: number, 
+    height: number, 
+    weight: number, 
+    star_rating: number, 
+    athleteSchedule: string
+  ) {
+    const newUserStudentAthlete: UserStudentAthlete = {
+      // User
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      // Student
+      className: className, 
+      grade: grade,
+      student_schedule: studentSchedule,
+      // Athlete
+      speed: speed,
+      height: height,
+      weight: weight,
+      star_rating: star_rating,
+      athlete_schedule: athleteSchedule,
+    };
+    
+    console.log('xx');
+    
+    this.userService.addUserStudentAthlete(newUserStudentAthlete).subscribe(response => {
+      console.log('User and Athlete added:', response);
+      this.getAllUsers();  // Refresh users after adding
+    });
+  }
+  
 
   deleteUser(id: number): void {
     this.userService.deleteUser(id).subscribe(() => {

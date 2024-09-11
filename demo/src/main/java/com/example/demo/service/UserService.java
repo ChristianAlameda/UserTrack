@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entity.Athlete;
 import com.example.demo.entity.Student;
 import com.example.demo.entity.User;
+import com.example.demo.repository.AthleteRepository;
 import com.example.demo.repository.StudentRepository;
 import com.example.demo.repository.UserRepository;
 
@@ -24,6 +26,9 @@ public class UserService {
     @Autowired
     private StudentRepository studentRepository;
 
+    @Autowired
+    private AthleteRepository athleteRepository;
+
     public List<User> getAllUsers(){
         return userRepository.findAll();
     }
@@ -32,12 +37,12 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
-    // public User addUser(User user){
-    //     return userRepository.save(user);
-    // }
+    public User addUser(User user){
+        return userRepository.save(user);
+    }
 
     @Transactional  // Ensures both user and student are saved together or rolled back in case of an error
-    public void addUserAndStudent(User user, Student student) {
+    public void addUserStudent(User user, Student student) {
         // Step 1: Save the user
         User savedUser = userRepository.save(user);
 
@@ -47,6 +52,38 @@ public class UserService {
         // Step 3: Save the student
         studentRepository.save(student);
     }
+
+    @Transactional  // Ensures both user and student are saved together or rolled back in case of an error
+    public void addUserAthlete(User user, Athlete athlete) {
+        // Step 1: Save the user
+        User savedUser = userRepository.save(user);
+
+        // Step 2: Set the userId for the student
+        athlete.setUserId(savedUser.getId());
+
+        // Step 3: Save the student
+        athleteRepository.save(athlete);
+    }
+
+    @Transactional  // Ensures both user and student are saved together or rolled back in case of an error
+    public void addUserStudentAthlete(User user, Student student, Athlete athlete) {
+        // Step 1: Save the user
+        User savedUser = userRepository.save(user);
+
+        // Step 2: Set the userId for the student
+        student.setUserId(savedUser.getId());
+
+        // Step 3: Save the student
+        studentRepository.save(student);
+
+        // Step 2: Set the userId for the athlete
+        athlete.setUserId(savedUser.getId());
+
+        // Step 3: Save the athlete
+        athleteRepository.save(athlete);
+    }
+
+    
 
     
 

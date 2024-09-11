@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.demo.entity.DTOs;
 
 public class UserStudentDTO {
     private String email;
@@ -6,7 +6,24 @@ public class UserStudentDTO {
     private String lastName;
     private String className;
     private String grade;
-    private String schedule;
+    private String studentSchedule;
+
+    UserStudentDTO(){}
+    UserStudentDTO(
+        String email,
+        String firstName,
+        String lastName,
+        String className,
+        String grade,
+        String studentSchedule)
+    {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.className = className;
+        this.grade = grade;
+        this.studentSchedule = studentSchedule;
+    }
 
     // Getters and Setters
     public String getEmail() {
@@ -49,12 +66,12 @@ public class UserStudentDTO {
         this.grade = grade;
     }
 
-    public String getSchedule() {
-        return schedule;
+    public String getStudentSchedule() {
+        return studentSchedule;
     }
 
-    public void setSchedule(String schedule) {
-        this.schedule = schedule;
+    public void setStudentSchedule(String studentSchedule) {
+        this.studentSchedule = studentSchedule;
     }
 }
 

@@ -22,34 +22,175 @@
       <div class="card-header">
           <h2 class="h4">Add User and Student</h2>
       </div>
-      <div class="card-body">
-          <form (submit)="addUserAndStudent(firstNameInput.value, lastNameInput.value, emailInput.value, classNameInput.value, gradeInput.value, scheduleInput.value)">
-              <!-- User Information -->
-              <div class="mb-3">
-                  <input #firstNameInput type="text" id="firstName" class="form-control" placeholder="Enter First Name" required />
-              </div>
-              <div class="mb-3">
-                  <input #lastNameInput type="text" id="lastName" class="form-control" placeholder="Enter Last Name" required />
-              </div>
-              <div class="mb-3">
-                  <input #emailInput type="email" id="email" class="form-control" placeholder="Enter Email" required />
-              </div>
 
-              <!-- Student Information -->
-              <div class="mb-3">
-                  <input #classNameInput type="text" id="className" class="form-control" placeholder="Enter Class Name" required />
-              </div>
-              <div class="mb-3">
-                  <input #gradeInput type="text" id="grade" class="form-control" placeholder="Enter Grade (e.g., A, B+)" maxlength="2" required />
-              </div>
-              <div class="mb-3">
-                  <input #scheduleInput type="text" id="schedule" class="form-control" placeholder="Enter Schedule (e.g., Mon-Wed 9:00-10:30 AM)" required />
-              </div>
+      <form>
+        @for(userType of userTypes; track userType){
+        <div>
+            <label>
+              <input 
+                type="radio" 
+                [(ngModel)]="inputValue" 
+                [value]="userType" 
+                name="userType"
+              >
+              {{ userType }}
+            </label>
+          </div>
+          }
+      </form>
+      @if(inputValue==='User'){
+        <!-- User Information -->
+        <form (submit)="addUser(firstNameInput.value, lastNameInput.value, emailInput.value)">
+          <div class="mb-3">
+            <input #firstNameInput type="text" id="firstName" class="form-control" placeholder="Enter First Name" required />
+          </div>
+          <div class="mb-3">
+              <input #lastNameInput type="text" id="lastName" class="form-control" placeholder="Enter Last Name" required />
+          </div>
+          <div class="mb-3">
+              <input #emailInput type="email" id="email" class="form-control" placeholder="Enter Email" required />
+          </div>
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary w-100">Add User and Student</button>
+        </form>
+      }
+      @if(inputValue==="UserStudent"){
+        <form (submit)="addUserStudent(
+          firstNameInput.value, 
+          lastNameInput.value, 
+          emailInput.value, 
+          classNameInput.value, 
+          gradeInput.value, 
+          scheduleInput.value)">
+          <!-- User Information -->
+          <div class="mb-3">
+              <input #firstNameInput type="text" id="firstName" class="form-control" placeholder="Enter First Name" required />
+          </div>
+          <div class="mb-3">
+              <input #lastNameInput type="text" id="lastName" class="form-control" placeholder="Enter Last Name" required />
+          </div>
+          <div class="mb-3">
+              <input #emailInput type="email" id="email" class="form-control" placeholder="Enter Email" required />
+          </div>
 
-              <!-- Submit Button -->
-              <button type="submit" class="btn btn-primary w-100">Add User and Student</button>
-          </form>
-      </div>
+          <!-- Student Information -->
+          <div class="mb-3">
+              <input #classNameInput type="text" id="className" class="form-control" placeholder="Enter Class Name" required />
+          </div>
+          <div class="mb-3">
+              <input #gradeInput type="text" id="grade" class="form-control" placeholder="Enter Grade (e.g., A, B+)" maxlength="2" required />
+          </div>
+          <div class="mb-3">
+              <input #scheduleInput type="text" id="schedule" class="form-control" placeholder="Enter Schedule (e.g., Mon-Wed 9:00-10:30 AM)" required />
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary w-100">Add User and Student</button>
+      </form>
+      }
+
+      @if(inputValue === "UserAthlete"){
+        <form (submit)="addUserAthlete(
+          firstNameInput.value, 
+          lastNameInput.value, 
+          emailInput.value, 
+          speedInput.valueAsNumber, 
+          heightInput.valueAsNumber, 
+          weightInput.valueAsNumber, 
+          starRatingInput.valueAsNumber, 
+          athleteScheduleInput.value)">
+            <!-- User Information -->
+            <div class="mb-3">
+                <input #firstNameInput type="text" id="firstName" class="form-control" placeholder="Enter First Name" required />
+            </div>
+            <div class="mb-3">
+                <input #lastNameInput type="text" id="lastName" class="form-control" placeholder="Enter Last Name" required />
+            </div>
+            <div class="mb-3">
+                <input #emailInput type="email" id="email" class="form-control" placeholder="Enter Email" required />
+            </div>
+
+            <!-- Athlete Information -->
+            <div class="mb-3">
+                <input #speedInput type="number" id="speed" class="form-control" placeholder="Enter Speed" required />
+            </div>
+            <div class="mb-3">
+                <input #heightInput type="number" id="height" class="form-control" placeholder="Enter Height" required />
+            </div>
+            <div class="mb-3">
+                <input #weightInput type="number" id="weight" class="form-control" placeholder="Enter Weight" required />
+            </div>
+            <div class="mb-3">
+                <input #starRatingInput type="number" id="starRating" class="form-control" placeholder="Enter Star Rating" min="1" max="5" required />
+            </div>
+            <div class="mb-3">
+                <input #athleteScheduleInput type="text" id="athleteSchedule" class="form-control" placeholder="Enter Athlete Schedule" required />
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary w-100">Add User and Athlete</button>
+        </form>
+      }
+
+      @if(inputValue === "UserStudentAthlete"){
+        <form (ngSubmit)="addUserStudentAthlete(
+          firstNameInput.value, 
+          lastNameInput.value, 
+          emailInput.value, 
+          classNameInput.value, 
+          gradeInput.value, 
+          scheduleInput.value, 
+          speedInput.valueAsNumber, 
+          heightInput.valueAsNumber, 
+          weightInput.valueAsNumber, 
+          starRatingInput.valueAsNumber, 
+          athleteScheduleInput.value)">
+
+          
+          <!-- User Information -->
+          <div class="mb-3">
+              <input #firstNameInput type="text" id="firstName" class="form-control" placeholder="Enter First Name" required />
+          </div>
+          <div class="mb-3">
+              <input #lastNameInput type="text" id="lastName" class="form-control" placeholder="Enter Last Name" required />
+          </div>
+          <div class="mb-3">
+              <input #emailInput type="email" id="email" class="form-control" placeholder="Enter Email" required />
+          </div>
+
+          <!-- Student Information -->
+          <div class="mb-3">
+              <input #classNameInput type="text" id="className" class="form-control" placeholder="Enter Class Name" required />
+          </div>
+          <div class="mb-3">
+              <input #gradeInput type="text" id="grade" class="form-control" placeholder="Enter Grade (e.g., A, B+)" maxlength="2" required />
+          </div>
+          <div class="mb-3">
+              <input #scheduleInput type="text" id="schedule" class="form-control" placeholder="Enter Schedule (e.g., Mon-Wed 9:00-10:30 AM)" required />
+          </div>
+
+          <!-- Athlete Information -->
+          <div class="mb-3">
+              <input #speedInput type="number" id="speed" class="form-control" placeholder="Enter Speed" required />
+          </div>
+          <div class="mb-3">
+              <input #heightInput type="number" id="height" class="form-control" placeholder="Enter Height" required />
+          </div>
+          <div class="mb-3">
+              <input #weightInput type="number" id="weight" class="form-control" placeholder="Enter Weight" required />
+          </div>
+          <div class="mb-3">
+              <input #starRatingInput type="number" id="starRating" class="form-control" placeholder="Enter Star Rating" min="1" max="5" required />
+          </div>
+          <div class="mb-3">
+              <input #athleteScheduleInput type="text" id="athleteSchedule" class="form-control" placeholder="Enter Athlete Schedule" required />
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary w-100">Add User Student Athlete</button>
+      </form>
+
+      }
     </div>
 
 

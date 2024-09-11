@@ -1,8 +1,8 @@
-export interface userStudent {
+export interface UserStudent {
     firstName: String;
     lastName: String;
     email: String;
     className: String;
     grade: String;
-    schedule: String;
+    student_schedule: String;
 }
