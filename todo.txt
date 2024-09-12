@@ -1,8 +1,11 @@
-disallow a user addition with the same email
-
-add a way to input your schedule
-
-show which users are either students or athletes or both
-
-have a search function in All sections
-
+Disallow a user addition with the same email
+Be able to edit a user
+Edit a student
+Add a way to input your schedule
+Have a search function in All sections
+Pagination for users, athletes, and students
+Have first Name Last Name in Student and Athlete All sections
+Filter by grade or class
+Sort by attributes for athletes
+Only allow Freshman, Sophomore, Junior, Senior for grade
+Do more documentation

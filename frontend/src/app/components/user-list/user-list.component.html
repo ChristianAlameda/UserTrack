@@ -383,28 +383,5 @@
         </ul>
       </div>
     </div>
-
-    
-  
-    <!-- Count Users By Last Name -->
-    <div class="card mb-4">
-      <div class="card-header">
-        <h2 class="h4">Count Users By Last Name</h2>
-      </div>
-      <div class="card-body">
-        <div class="input-group mb-3">
-          <input #lastNameInput1 type="text" class="form-control" placeholder="Enter last name" />
-          <button class="btn btn-success" (click)="getCountByLastName(lastNameInput1.value)">Count Users</button>
-        </div>
-        @if (count && lastName) {
-          @if (count === 1){
-            <strong>{{lastName}} was seen in our database {{count}} time!</strong> 
-          }
-          @if (count > 1){
-            <strong>{{lastName}} was seen in our database {{count}} times!</strong> 
-          }
-        }
-      </div>
-    </div>
   </div>
   

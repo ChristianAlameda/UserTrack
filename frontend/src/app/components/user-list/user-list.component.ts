@@ -23,13 +23,14 @@ export class AppUserListComponent implements OnInit {
   searchResults: User[] = [];
   // For deciding what user to select for All section
   AllOfWhich: string[] = ['User', 'Student', 'Athlete'];  
-  AllOfWhichValue: string = 'User';
-  // deciding what type of user we are adding
-  userTypes: string[] = ['User', 'UserStudent', 'UserAthlete', 'UserStudentAthlete'];  
-  inputValue: string = 'User';
+  AllOfWhichValue: string = '';
   // deciding whether to get by email or date
   emailOrDates: string[] = ['Email', 'Date'];  
-  emailOrDateValue: string = 'Email';
+  emailOrDateValue: string = '';
+  // deciding what type of user we are adding
+  userTypes: string[] = ['User', 'UserStudent', 'UserAthlete', 'UserStudentAthlete'];  
+  inputValue: string = '';
+  
 
   // Student
   allStudents: Student[] = []; 
