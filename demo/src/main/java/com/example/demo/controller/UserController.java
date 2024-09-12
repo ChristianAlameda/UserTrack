@@ -59,6 +59,8 @@ public class UserController {
         user.setEmail(userStudentDTO.getEmail());
         user.setFirstName(userStudentDTO.getFirstName());
         user.setLastName(userStudentDTO.getLastName());
+        user.setFlag(userStudentDTO.getFlag());
+
         // user.setCreatedAt(new java.sql.Timestamp(System.currentTimeMillis()));
 
 
@@ -83,6 +85,8 @@ public class UserController {
         user.setEmail(userAthleteDTO.getEmail());
         user.setFirstName(userAthleteDTO.getFirstName());
         user.setLastName(userAthleteDTO.getLastName());
+        user.setFlag(userAthleteDTO.getFlag());
+
 
         Athlete athlete = new Athlete();
         athlete.setSpeed(userAthleteDTO.getSpeed());
@@ -108,7 +112,7 @@ public class UserController {
         user.setEmail(userStudentAthleteDTO.getEmail());
         user.setFirstName(userStudentAthleteDTO.getFirstName());
         user.setLastName(userStudentAthleteDTO.getLastName());
-        // user.setCreatedAt(new java.sql.Timestamp(System.currentTimeMillis()));
+        user.setFlag(userStudentAthleteDTO.getFlag());
 
         Student student = new Student();
         student.setClassName(userStudentAthleteDTO.getClassName());

@@ -3,18 +3,163 @@
     <!-- List of All Users -->
     <div class="card mb-4">
       <div class="card-header">
-        <h2 class="h4">All Users</h2>
+        <h2 class="h4">All {{AllOfWhichValue}}s</h2>
       </div>
-      <div class="card-body">
+      <!-- User Type Selection Form -->
+      <form>
+        <div class="mb-3">
+          <div class="form-check">
+            @for(user of AllOfWhich; track user){
+              <div class="form-check">
+                <input 
+                  type="radio" 
+                  [(ngModel)]="AllOfWhichValue" 
+                  [value]="user" 
+                  id="{{user}}"
+                  name="user"
+                  class="form-check-input"
+                >
+                <label for="{{user}}" class="form-check-label">
+                  {{ user }}
+                </label>
+              </div>
+            }
+          </div>
+        </div>
+      </form>
+
+      <!-- All of Athletes -->
+      @if(AllOfWhichValue == "User"){
+        <div class="card-body">
+          <ul class="list-group">
+            @for(user of allUsers; track user){
+              <li class="list-group-item">
+                @if(user.flag == 'blue'){
+                  <strong>{{ user.firstName }} {{ user.lastName }}</strong>
+                }
+                @if(user.flag == "green"){
+                  <strong style="color:green">{{ user.firstName }} {{ user.lastName }}</strong>
+                }
+                @if(user.flag == "red"){
+                  <strong style="color:red">{{ user.firstName }} {{ user.lastName }}</strong>
+                }
+                @if(user.flag == "orange"){
+                  <strong style="color:orange">{{ user.firstName }} {{ user.lastName }}</strong>
+                }
+                
+                <span class="text-muted">({{ user.email }})</span>
+                <span class="text-info float-end">Created At: {{ user.createdAt | date:'short' }}</span>
+              </li>
+            }
+          </ul>
+        </div>
         <button class="btn btn-primary" (click)="getAllUsers()">Refresh Users</button>
+      }
+
+      <!-- All of Students -->
+      @if(AllOfWhichValue == "Student"){
+        <div class="card-body">
+          <ul class="list-group">
+            @for(student of allStudents; track user){
+              <li class="list-group-item">
+                <strong>{{ student.className }} {{ student.grade }}</strong>
+                <span class="text-muted">({{ student.studentSchedule }})</span>
+              </li>
+            }
+          </ul>
+        </div>
+        <button class="btn btn-primary" (click)="getAllStudents()">Refresh Users</button>
+      }
+
+      <!-- All of Athletes -->
+      @if(AllOfWhichValue == "Athlete"){
+        <div class="card-body">
+          <ul class="list-group">
+            @for(athlete of allAthletes; track athlete){
+              <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                  <div class="fw-bold">Athlete Details</div>
+                  <div>
+                    <strong>Speed:</strong> {{ athlete.speed }}<br>
+                    <strong>Weight:</strong> {{ athlete.weight }}<br>
+                    <strong>Height:</strong> {{ athlete.height }}<br>
+                    <strong>Star Rating:</strong> {{ athlete.starRating }}<br>
+                    <strong>Schedule:</strong> {{ athlete.athleteSchedule }}
+                  </div>
+                </div>
+              </li>
+            }
+          </ul>
+        </div>
+        <button class="btn btn-primary" (click)="getAllAthletes()">Refresh Users</button>
+      }
+    </div>
+
+    <!-- Get user by Email Or Date -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h2 class="h4">Get User By {{emailOrDateValue}}</h2>
+      </div>
+      <!-- Email or Date Selection Form -->
+      <form>
+        <div class="mb-3">
+          <div class="form-check">
+            @for(emailOrDate of emailOrDates; track emailOrDate){
+              <div class="form-check">
+                <input 
+                  type="radio" 
+                  [(ngModel)]="emailOrDateValue" 
+                  [value]="emailOrDate" 
+                  id="{{emailOrDate}}"
+                  name="emailOrDate"
+                  class="form-check-input"
+                >
+                <label for="{{emailOrDate}}" class="form-check-label">
+                  {{ emailOrDate }}
+                </label>
+              </div>
+            }
+          </div>
+        </div>
+      </form>
+
+      @if(emailOrDateValue == "Email"){
+        <div class="card-body">
+          <div class="input-group mb-3">
+            <input #emailInput1 type="email" class="form-control" placeholder="Enter email" /> <!-- type="email" -->
+            <button class="btn btn-success" (click)="getUserByEmail(emailInput1.value)">Get User</button><!-- emailInput.value -->
+          </div>
+          <ul class="list-group">
+            @if (filteredUsers) {
+              @for(filteredUser of filteredUsers; track filteredUser){
+                <li class="list-group-item">
+                  <strong>{{ filteredUser.firstName }} {{ filteredUser.lastName }} </strong> 
+                  <span class="text-muted">({{ filteredUser.email }})</span> 
+                  <span class="text-info float-end">Created At: {{ filteredUser.createdAt}}</span>
+                </li>  
+              }
+              
+            }
+          </ul>
+        </div>
+      }
+    @if(emailOrDateValue == "Date"){
+      <div class="card-body">
+        <div class="input-group mb-3">
+          <input #dateInput type="datetime-local" class="form-control" placeholder="Enter date" />
+          <button class="btn btn-success" (click)="getUsersByDate(dateInput.value)">Get Users</button>
+        </div>
         <ul class="list-group">
-          <li *ngFor="let user of allUsers" class="list-group-item">
-            <strong>{{ user.firstName }} {{ user.lastName }}</strong>
-            <span class="text-muted">({{ user.email }})</span>
-            <span class="text-info float-end">Created At: {{ user.createdAt | date:'short' }}</span>
-          </li>
+          @for (user of filteredUsers; track user) {
+            <li class="list-group-item">
+              <strong>{{ user.firstName }} {{ user.lastName }} </strong> 
+              <span class="text-muted">({{ user.email }})</span> 
+              <span class="text-info float-end">Created At: {{ user.createdAt}}</span>
+            </li>
+          }
         </ul>
       </div>
+    }
     </div>
 
     <!-- Add User, Student, Athlete, UserStudentAthlete -->
@@ -211,6 +356,7 @@
       }
     </div>
 
+    
 
 
     <!-- Delete Users -->
@@ -238,72 +384,7 @@
       </div>
     </div>
 
-    <!-- Get user by Email Or Date -->
-    <div class="card mb-4">
-      <div class="card-header">
-        <h2 class="h4">Get User By {{emailOrDateValue}}</h2>
-      </div>
-      <!-- Email or Date Selection Form -->
-      <form>
-        <div class="mb-3">
-          <div class="form-check">
-            @for(emailOrDate of emailOrDates; track emailOrDate){
-              <div class="form-check">
-                <input 
-                  type="radio" 
-                  [(ngModel)]="emailOrDateValue" 
-                  [value]="emailOrDate" 
-                  id="{{emailOrDate}}"
-                  name="emailOrDate"
-                  class="form-check-input"
-                >
-                <label for="{{emailOrDate}}" class="form-check-label">
-                  {{ emailOrDate }}
-                </label>
-              </div>
-            }
-          </div>
-        </div>
-      </form>
-
-      @if(emailOrDateValue == "Email"){
-        <div class="card-body">
-          <div class="input-group mb-3">
-            <input #emailInput1 type="email" class="form-control" placeholder="Enter email" /> <!-- type="email" -->
-            <button class="btn btn-success" (click)="getUserByEmail(emailInput1.value)">Get User</button><!-- emailInput.value -->
-          </div>
-          <ul class="list-group">
-            @if (filteredUsers) {
-              @for(filteredUser of filteredUsers; track filteredUser){
-                <li class="list-group-item">
-                  <strong>{{ filteredUser.firstName }} {{ filteredUser.lastName }} </strong> 
-                  <span class="text-muted">({{ filteredUser.email }})</span> 
-                  <span class="text-info float-end">Created At: {{ filteredUser.createdAt}}</span>
-                </li>  
-              }
-              
-            }
-          </ul>
-        </div>
-      }
-    @if(emailOrDateValue == "Date"){
-      <div class="card-body">
-        <div class="input-group mb-3">
-          <input #dateInput type="datetime-local" class="form-control" placeholder="Enter date" />
-          <button class="btn btn-success" (click)="getUsersByDate(dateInput.value)">Get Users</button>
-        </div>
-        <ul class="list-group">
-          @for (user of filteredUsers; track user) {
-            <li class="list-group-item">
-              <strong>{{ user.firstName }} {{ user.lastName }} </strong> 
-              <span class="text-muted">({{ user.email }})</span> 
-              <span class="text-info float-end">Created At: {{ user.createdAt}}</span>
-            </li>
-          }
-        </ul>
-      </div>
-    }
-    </div>
+    
   
     <!-- Count Users By Last Name -->
     <div class="card mb-4">

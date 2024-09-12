@@ -4,6 +4,7 @@ public class UserStudentAthleteDTO {
     private String email;
     private String firstName;
     private String lastName;
+    private String flag; //adding it
     private String className;
     private String grade;
     private String studentSchedule; 
@@ -19,9 +20,12 @@ public class UserStudentAthleteDTO {
         String email,
         String firstName,
         String lastName,
+        String flag,
+
         String className,
         String grade,
         String studentSchedule,
+
         int speed,
         int height,
         int weight,
@@ -32,6 +36,7 @@ public class UserStudentAthleteDTO {
         this.firstName = firstName;
         this.lastName = lastName;
         this.className = className;
+        this.flag = flag;
         this.grade = grade;
         this.studentSchedule = studentSchedule;
         this.speed = speed;
@@ -64,6 +69,14 @@ public class UserStudentAthleteDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getFlag(){
+        return flag;
+    }
+
+    public void setFlag(String flag){
+        this.flag = flag;
     }
 
     public String getClassName() {

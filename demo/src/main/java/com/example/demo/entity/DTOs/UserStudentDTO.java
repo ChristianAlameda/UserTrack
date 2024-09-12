@@ -4,6 +4,7 @@ public class UserStudentDTO {
     private String email;
     private String firstName;
     private String lastName;
+    private String flag;
     private String className;
     private String grade;
     private String studentSchedule;
@@ -14,6 +15,8 @@ public class UserStudentDTO {
         String email,
         String firstName,
         String lastName,
+        String flag,
+
         String className,
         String grade,
         String studentSchedule
@@ -21,6 +24,7 @@ public class UserStudentDTO {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.flag = flag;
         this.className = className;
         this.grade = grade;
         this.studentSchedule = studentSchedule;
@@ -49,6 +53,14 @@ public class UserStudentDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getFlag(){
+        return flag;
+    }
+
+    public void setFlag(String flag){
+        this.flag = flag;
     }
 
     public String getClassName() {

@@ -2,6 +2,7 @@ export interface UserStudentAthlete {
     firstName: string;
     lastName: string;
     email: string;
+    flag?:string;
     className: string;
     grade: string;
     studentSchedule: string;

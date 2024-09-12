@@ -4,6 +4,10 @@ import { UserService } from '../../services/user.service';
 import { UserStudent } from '../../models/userStudent.model';
 import { UserAthlete } from '../../models/userAthlete.model';
 import { UserStudentAthlete } from '../../models/userStudentAthlete.model';
+import { StudentService } from '../../services/student.service';
+import { Student } from '../../models/student.model';
+import { Athlete } from '../../models/athlete.model';
+import { AthleteService } from '../../services/athlete.service';
 
 @Component({
   selector: 'app-user-list',
@@ -17,15 +21,48 @@ export class AppUserListComponent implements OnInit {
   count: number = 0;
   lastName: string = '';
   searchResults: User[] = [];
+  // For deciding what user to select for All section
+  AllOfWhich: string[] = ['User', 'Student', 'Athlete'];  
+  AllOfWhichValue: string = 'User';
+  // deciding what type of user we are adding
   userTypes: string[] = ['User', 'UserStudent', 'UserAthlete', 'UserStudentAthlete'];  
   inputValue: string = 'User';
+  // deciding whether to get by email or date
   emailOrDates: string[] = ['Email', 'Date'];  
   emailOrDateValue: string = 'Email';
 
-  constructor(private userService: UserService) {}
+  // Student
+  allStudents: Student[] = []; 
+  studentCount: number = 0;
+
+  // Athlete
+  allAthletes: Athlete[] = [];
+  athleteCount: number = 0;
+  
+  constructor(
+    private userService: UserService, 
+    private studentService: StudentService, 
+    private athleteService: AthleteService ) {}
 
   ngOnInit(): void {
     this.getAllUsers();
+    this.getAllStudents();
+    this.getAllAthletes()
+  }
+
+  getAllAthletes(): void {
+    this.athleteService.getAllAthletes().subscribe(data=>{
+      console.log(data);
+      this.allAthletes = data;
+      this.athleteCount = data.length;
+    })
+  }
+
+  getAllStudents(): void {
+    this.studentService.getAllStudents().subscribe(data=>{
+      this.allStudents = data;
+      this.studentCount = data.length;
+    })
   }
 
   getAllUsers(): void {
@@ -60,6 +97,7 @@ export class AppUserListComponent implements OnInit {
       firstName: firstName,
       lastName: lastName,
       email: email,
+      flag: 'blue',
     };
 
     this.userService.addUser(newUser).subscribe(response => {
@@ -80,9 +118,12 @@ export class AppUserListComponent implements OnInit {
     athleteSchedule: string
   ) {
     const newUserAthlete: UserAthlete = {
+      // user
       firstName: firstName,
       lastName: lastName,
       email: email,
+      flag: 'green',
+      // athlete
       speed: speed,
       height: height,
       weight: weight,
@@ -107,9 +148,12 @@ export class AppUserListComponent implements OnInit {
     studentSchedule: string
   ): void {
     const newUserStudent: UserStudent = {
+      // User
       firstName: firstName,
       lastName: lastName,
       email: email,
+      flag: 'red',
+      // Student
       className: className,
       grade: grade,
       studentSchedule: studentSchedule
@@ -141,6 +185,7 @@ export class AppUserListComponent implements OnInit {
       firstName: firstName,
       lastName: lastName,
       email: email,
+      flag: 'orange',
       // Student
       className: className, 
       grade: grade,

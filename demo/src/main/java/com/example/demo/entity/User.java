@@ -19,6 +19,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+    private String flag; // if user = null, if userStudent = green, if userAthlete = red, if userStudentAthlete = orange
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -27,10 +28,11 @@ public class User {
     public User() {}
 
     // Parameterized constructor
-    public User(String firstName, String lastName, String email) {
+    public User(String firstName, String lastName, String email, String flag) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.flag = flag;
         this.createdAt = LocalDateTime.now();
     }
 
@@ -46,6 +48,9 @@ public class User {
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
+
+    public String getFlag(){ return flag;}
+    public void setFlag(String flag){this.flag = flag;}
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }

@@ -5,6 +5,7 @@ public class UserAthleteDTO {
     private String email;
     private String firstName;
     private String lastName;
+    private String flag; // adding it
 
     // Athlete
     private int speed;
@@ -19,6 +20,7 @@ public class UserAthleteDTO {
         String email,
         String firstName,
         String lastName,
+        String flag,
         int speed,
         int height,
         int weight,
@@ -28,6 +30,7 @@ public class UserAthleteDTO {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.flag = flag;
         this.speed = speed;
         this.height = height;
         this.weight = weight;
@@ -58,6 +61,14 @@ public class UserAthleteDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getFlag(){
+        return flag;
+    }
+
+    public void setFlag(String flag){
+        this.flag = flag;
     }
 
     public int getSpeed() {
