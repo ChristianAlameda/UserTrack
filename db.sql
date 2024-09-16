@@ -3,6 +3,7 @@ CREATE TABLE users (
     email VARCHAR(255) NULL,
     first_name VARCHAR(255) NULL,
     last_name VARCHAR(255) NULL,
+    flag VARCHAR(255) NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -30,3 +31,18 @@ CREATE TABLE athletes (
         ON DELETE CASCADE
 );
 
+
+-- Grabbing Student
+select u.email, u.first_name, u.last_name, u.flag, s.class_name, s.grade, s.student_schedule
+from users u, students s
+where u.id = s.user_id;
+
+-- Grabbing Athlete
+select u.email, u.first_name, u.last_name, u.flag, a.speed, a.height, a.weight, a.star_rating, a.athlete_schedule
+from users u, athletes a 
+where u.id = a.user_id;
+
+-- Grabbing StudentAthletes
+select u.email, u.first_name, u.last_name, u.flag, s.class_name, s.grade, s.student_schedule, a.speed, a.height, a.weight, a.star_rating, a.athlete_schedule
+from users u, students s, athletes a
+where u.id = s.user_id = a.user_id;

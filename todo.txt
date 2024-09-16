@@ -1,4 +1,3 @@
-Disallow a user addition with the same email
 Be able to edit a user
 Edit a student
 Add a way to input your schedule
@@ -9,3 +8,6 @@ Filter by grade or class
 Sort by attributes for athletes
 Only allow Freshman, Sophomore, Junior, Senior for grade
 Do more documentation
+
+things to do last for testing purposes:
+Disallow a user addition with the same email

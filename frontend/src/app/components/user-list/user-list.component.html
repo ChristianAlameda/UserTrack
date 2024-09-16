@@ -28,14 +28,14 @@
         </div>
       </form>
 
-      <!-- All of Athletes -->
+      <!-- All of Users -->
       @if(AllOfWhichValue == "User"){
         <div class="card-body">
           <ul class="list-group">
             @for(user of allUsers; track user){
               <li class="list-group-item">
                 @if(user.flag == 'blue'){
-                  <strong>{{ user.firstName }} {{ user.lastName }}</strong>
+                  <strong style="color:blue">{{ user.firstName }} {{ user.lastName }}</strong>
                 }
                 @if(user.flag == "green"){
                   <strong style="color:green">{{ user.firstName }} {{ user.lastName }}</strong>
@@ -60,10 +60,19 @@
       @if(AllOfWhichValue == "Student"){
         <div class="card-body">
           <ul class="list-group">
-            @for(student of allStudents; track user){
+            @for(student of allStudents; track student){
               <li class="list-group-item">
-                <strong>{{ student.className }} {{ student.grade }}</strong>
-                <span class="text-muted">({{ student.studentSchedule }})</span>
+                @if(student.flag == "red"){
+                  <strong style="color:red">{{ student.firstName }} {{ student.lastName }}</strong>
+                }
+                @if(student.flag == "orange"){
+                  <strong style="color:orange">{{ student.firstName }} {{ student.lastName }}</strong>
+                }
+                <br>
+                <strong>
+                  Class: {{ student.className }} <br>Grade: {{ student.grade }}<br>
+                  Schedule: ({{ student.studentSchedule }})
+              </strong>
               </li>
             }
           </ul>
@@ -78,7 +87,13 @@
             @for(athlete of allAthletes; track athlete){
               <li class="list-group-item d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
-                  <div class="fw-bold">Athlete Details</div>
+                  @if(athlete.flag == "green"){
+                    <strong style="color:green">{{ athlete.firstName }} {{ athlete.lastName }}</strong>
+                  }
+                  @if(athlete.flag == "orange"){
+                    <strong style="color:orange">{{ athlete.firstName }} {{ athlete.lastName }}</strong>
+                  }
+                  
                   <div>
                     <strong>Speed:</strong> {{ athlete.speed }}<br>
                     <strong>Weight:</strong> {{ athlete.weight }}<br>
@@ -122,7 +137,7 @@
           </div>
         </div>
       </form>
-
+      <!-- GET USER BY EMAIL -->
       @if(emailOrDateValue == "Email"){
         <div class="card-body">
           <div class="input-group mb-3">
@@ -133,6 +148,18 @@
             @if (filteredUsers) {
               @for(filteredUser of filteredUsers; track filteredUser){
                 <li class="list-group-item">
+                  @if(filteredUser.flag == 'blue'){
+                    <strong style="color:blue">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
+                  }
+                  @if(filteredUser.flag == "green"){
+                    <strong style="color:green">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
+                  }
+                  @if(filteredUser.flag == "red"){
+                    <strong style="color:red">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
+                  }
+                  @if(filteredUser.flag == "orange"){
+                    <strong style="color:orange">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
+                  }
                   <strong>{{ filteredUser.firstName }} {{ filteredUser.lastName }} </strong> 
                   <span class="text-muted">({{ filteredUser.email }})</span> 
                   <span class="text-info float-end">Created At: {{ filteredUser.createdAt}}</span>
@@ -143,23 +170,90 @@
           </ul>
         </div>
       }
-    @if(emailOrDateValue == "Date"){
+      <!-- GET ALL BY DATE -->
+      @if(emailOrDateValue == "Date"){
+        <div class="card-body">
+          <div class="input-group mb-3">
+            <input #dateInput type="datetime-local" class="form-control" placeholder="Enter date" />
+            <button class="btn btn-success" (click)="getUsersByDate(dateInput.value)">Get Users</button>
+          </div>
+          <ul class="list-group">
+            @for(filteredUser of filteredUsers; track filteredUser){
+              <li class="list-group-item">
+                @if(filteredUser.flag == 'blue'){
+                  <strong style="color:blue">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
+                }
+                @if(filteredUser.flag == "green"){
+                  <strong style="color:green">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
+                }
+                @if(filteredUser.flag == "red"){
+                  <strong style="color:red">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
+                }
+                @if(filteredUser.flag == "orange"){
+                  <strong style="color:orange">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
+                }
+                <strong>{{ filteredUser.firstName }} {{ filteredUser.lastName }} </strong> 
+                <span class="text-muted">({{ filteredUser.email }})</span> 
+                <span class="text-info float-end">Created At: {{ filteredUser.createdAt}}</span>
+              </li>  
+            }
+          </ul>
+        </div>
+      }
+      @if(emailOrDateValue == "Name"){
+        <div class="card-body">
+          <div class="input-group mb-3">
+            <input #firstName2 type="text" class="form-control" placeholder="Enter first name" />
+            <button class="btn btn-success" (click)="getUserByFirstName(firstName2.value, 1)">Search</button>
+          </div>
+          <ul class="list-group">
+            @for(filteredUser of filteredUsers; track filteredUser){
+              <li class="list-group-item">
+                @if(filteredUser.flag == 'blue'){
+                  <strong style="color:blue">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
+                }
+                @if(filteredUser.flag == "green"){
+                  <strong style="color:green">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
+                }
+                @if(filteredUser.flag == "red"){
+                  <strong style="color:red">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
+                }
+                @if(filteredUser.flag == "orange"){
+                  <strong style="color:orange">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
+                }
+                <strong>{{ filteredUser.firstName }} {{ filteredUser.lastName }} </strong> 
+                <span class="text-muted">({{ filteredUser.email }})</span> 
+                <span class="text-info float-end">Created At: {{ filteredUser.createdAt}}</span>
+              </li>  
+            }
+          </ul>
+        </div>
+      }
+    </div>
+
+    <!-- Delete Users -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h2 class="h4">Delete Users</h2>
+      </div>
       <div class="card-body">
         <div class="input-group mb-3">
-          <input #dateInput type="datetime-local" class="form-control" placeholder="Enter date" />
-          <button class="btn btn-success" (click)="getUsersByDate(dateInput.value)">Get Users</button>
+          <input #firstName2 type="text" class="form-control" placeholder="Enter first name" />
+          <button class="btn btn-success" (click)="getUserByFirstName(firstName2.value, 2)">Search</button>
         </div>
         <ul class="list-group">
-          @for (user of filteredUsers; track user) {
+          @for(user of searchResults; track user){
             <li class="list-group-item">
-              <strong>{{ user.firstName }} {{ user.lastName }} </strong> 
-              <span class="text-muted">({{ user.email }})</span> 
-              <span class="text-info float-end">Created At: {{ user.createdAt}}</span>
+              <strong>{{ user.firstName }} {{ user.lastName }}</strong>
+              <span class="text-muted">({{ user.email }})</span>
+              <span class="text-info float-end">Created At: {{ user.createdAt | date:'short' }}</span>
+              @if(user.id){
+                <button class="btn btn-danger float-end" (click)="deleteUser(user.id)">Delete User</button>
+              }
             </li>
           }
         </ul>
       </div>
-    }
     </div>
 
     <!-- Add User, Student, Athlete, UserStudentAthlete -->
@@ -354,34 +448,6 @@
           </form>
         </div>
       }
-    </div>
-
-    
-
-
-    <!-- Delete Users -->
-    <div class="card mb-4">
-      <div class="card-header">
-        <h2 class="h4">Delete Users</h2>
-      </div>
-      <div class="card-body">
-        <div class="input-group mb-3">
-          <input #firstName2 type="text" class="form-control" placeholder="Enter first name" />
-          <button class="btn btn-success" (click)="getUserByFirstName(firstName2.value)">Search</button>
-        </div>
-        <ul class="list-group">
-          @for(user of searchResults; track user){
-            <li class="list-group-item">
-              <strong>{{ user.firstName }} {{ user.lastName }}</strong>
-              <span class="text-muted">({{ user.email }})</span>
-              <span class="text-info float-end">Created At: {{ user.createdAt | date:'short' }}</span>
-              @if(user.id){
-                <button class="btn btn-danger float-end" (click)="deleteUser(user.id)">Delete User</button>
-              }
-            </li>
-          }
-        </ul>
-      </div>
     </div>
   </div>
   

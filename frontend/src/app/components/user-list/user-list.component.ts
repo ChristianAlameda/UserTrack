@@ -25,7 +25,7 @@ export class AppUserListComponent implements OnInit {
   AllOfWhich: string[] = ['User', 'Student', 'Athlete'];  
   AllOfWhichValue: string = '';
   // deciding whether to get by email or date
-  emailOrDates: string[] = ['Email', 'Date'];  
+  emailOrDates: string[] = ['Name','Email', 'Date', ];  
   emailOrDateValue: string = '';
   // deciding what type of user we are adding
   userTypes: string[] = ['User', 'UserStudent', 'UserAthlete', 'UserStudentAthlete'];  
@@ -33,26 +33,32 @@ export class AppUserListComponent implements OnInit {
   
 
   // Student
-  allStudents: Student[] = []; 
+  allStudents: UserStudent[] = []; 
   studentCount: number = 0;
 
   // Athlete
-  allAthletes: Athlete[] = [];
+  allAthletes: UserAthlete[] = [];
   athleteCount: number = 0;
+
+  // student athletes
+  allStudentAthletes: UserStudentAthlete[] = [];
+  allStudentAthletesCount: number = 0;
+
   
   constructor(
     private userService: UserService, 
-    private studentService: StudentService, 
-    private athleteService: AthleteService ) {}
+     ) {}
 
   ngOnInit(): void {
     this.getAllUsers();
     this.getAllStudents();
     this.getAllAthletes()
+    // this.getAllStudentAthletes()
+
   }
 
   getAllAthletes(): void {
-    this.athleteService.getAllAthletes().subscribe(data=>{
+    this.userService.getAllAthletes().subscribe(data=>{
       console.log(data);
       this.allAthletes = data;
       this.athleteCount = data.length;
@@ -60,11 +66,18 @@ export class AppUserListComponent implements OnInit {
   }
 
   getAllStudents(): void {
-    this.studentService.getAllStudents().subscribe(data=>{
+    this.userService.getAllStudents().subscribe(data=>{
       this.allStudents = data;
       this.studentCount = data.length;
     })
   }
+
+  // getAllStudentAthletes(): void {
+  //   this.userService.getAllStudentAthletes().subscribe(data=>{
+  //     this.allStudentAthletes = data;
+  //     this.allStudentAthletesCount = data.length;
+  //   })
+  // }
 
   getAllUsers(): void {
     this.userService.getAllUsers().subscribe(data => {
@@ -214,9 +227,10 @@ export class AppUserListComponent implements OnInit {
     });
   }
 
-  getUserByFirstName(firstName: string): void {
+  getUserByFirstName(firstName: string, number:number): void {
     this.userService.getUserByFirstName(firstName).subscribe(data => {
-      this.searchResults = data;
+      if (number === 1){ this.filteredUsers = data;}
+      else if(number === 2){ this.searchResults = data;}
     });
   }
 }

@@ -5,6 +5,8 @@ import { User } from '../models/user.model';
 import { UserStudent } from '../models/userStudent.model';
 import { UserAthlete } from '../models/userAthlete.model';
 import { UserStudentAthlete } from '../models/userStudentAthlete.model';
+import { Student } from '../models/student.model';
+import { Athlete } from '../models/athlete.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +16,7 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.baseUrl}`);
-  }
-
-  getUserById(id: number): Observable<User> {
-    return this.http.get<User>(`${this.baseUrl}/${id}`);
-  }
-
+  //================ Adding Users ==================//
   addUser(newUser: User): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/addUser`, newUser);
   }
@@ -39,8 +34,38 @@ export class UserService {
     return this.http.post<any>(`${this.baseUrl}/addUserStudentAthlete`, newUserStudentAthlete);
   }
 
+  //================ Deleting Users ==================//
+
   deleteUser(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
+
+  deleteUserByEmail(email:String): Observable<void>{
+    return this.http.delete<void>(`${this.baseUrl}/deleteByEmail/${email}`)
+  }
+
+  //================ Getting Users ==================//
+  
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}`);
+  }
+  // gets all students with user info
+  getAllStudents(): Observable<UserStudent[]>{
+    return this.http.get<UserStudent[]>(`${this.baseUrl}/students`);
+  }
+
+  // gets all athletes with user info
+  getAllAthletes(): Observable<UserAthlete[]>{
+    return this.http.get<UserAthlete[]>(`${this.baseUrl}/athletes`);
+  }
+
+  // gets all athlete students with user info
+  getAllStudentAthletes(): Observable<UserStudentAthlete>{
+    return this.http.get<UserStudentAthlete>(`${this.baseUrl}/studentAthletes`);
+  }
+
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`${this.baseUrl}/${id}`);
   }
 
   getUserByEmail(email: string): Observable<User[]>{
@@ -62,7 +87,7 @@ export class UserService {
   getUsersByDate(date: string): Observable<User[]>{
     return this.http.get<User[]>(`${this.baseUrl}/date?date=${date}`)
   }
-
+  
   getCountOfLastName(lastName: string):Observable<number>{
     return this.http.get<number>(`${this.baseUrl}/lastNameCount/${lastName}`);
   }
