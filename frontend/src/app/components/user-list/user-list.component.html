@@ -34,21 +34,20 @@
           <ul class="list-group">
             @for(user of allUsers; track user){
               <li class="list-group-item">
-                @if(user.flag == 'blue'){
-                  <strong style="color:blue">{{ user.firstName }} {{ user.lastName }}</strong>
+                @if(user.flag){
+                  <div>
+                    <strong [ngStyle]="{ 'color': getFlagColor(user.flag) }">
+                      {{ user.firstName }} {{ user.lastName }}
+                    </strong>
+                  </div>
+                  
                 }
-                @if(user.flag == "green"){
-                  <strong style="color:green">{{ user.firstName }} {{ user.lastName }}</strong>
-                }
-                @if(user.flag == "red"){
-                  <strong style="color:red">{{ user.firstName }} {{ user.lastName }}</strong>
-                }
-                @if(user.flag == "orange"){
-                  <strong style="color:orange">{{ user.firstName }} {{ user.lastName }}</strong>
-                }
-                
-                <span class="text-muted">({{ user.email }})</span>
-                <span class="text-info float-end">Created At: {{ user.createdAt | date:'short' }}</span>
+                <div>
+                  <strong>Email: {{ user.email }}</strong>
+                </div>
+                <div>
+                  <strong>Created At: {{ user.createdAt | date:'short' }}</strong>
+                </div>
               </li>
             }
           </ul>
@@ -62,11 +61,10 @@
           <ul class="list-group">
             @for(student of allStudents; track student){
               <li class="list-group-item">
-                @if(student.flag == "red"){
-                  <strong style="color:red">{{ student.firstName }} {{ student.lastName }}</strong>
-                }
-                @if(student.flag == "orange"){
-                  <strong style="color:orange">{{ student.firstName }} {{ student.lastName }}</strong>
+                @if(student.flag){
+                  <strong [ngStyle]="{ 'color': getFlagColor(student.flag) }">
+                    {{ student.firstName }} {{ student.lastName }}
+                  </strong>
                 }
                 <br>
                 <strong>
@@ -87,19 +85,17 @@
             @for(athlete of allAthletes; track athlete){
               <li class="list-group-item d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
-                  @if(athlete.flag == "green"){
-                    <strong style="color:green">{{ athlete.firstName }} {{ athlete.lastName }}</strong>
+                  @if(athlete.flag){
+                    <strong [ngStyle]="{ 'color': getFlagColor(athlete.flag) }">
+                      {{ athlete.firstName }} {{ athlete.lastName }}
+                    </strong>
                   }
-                  @if(athlete.flag == "orange"){
-                    <strong style="color:orange">{{ athlete.firstName }} {{ athlete.lastName }}</strong>
-                  }
-                  
                   <div>
-                    <strong>Speed:</strong> {{ athlete.speed }}<br>
-                    <strong>Weight:</strong> {{ athlete.weight }}<br>
-                    <strong>Height:</strong> {{ athlete.height }}<br>
-                    <strong>Star Rating:</strong> {{ athlete.starRating }}<br>
-                    <strong>Schedule:</strong> {{ athlete.athleteSchedule }}
+                    <div><strong>Speed: {{ athlete.speed }}</strong></div>
+                    <div><strong>Weight: {{ athlete.weight }}</strong></div>
+                    <div><strong>Height: {{ athlete.height }}</strong></div>
+                    <div><strong>Star Rating: {{ athlete.starRating }}</strong> </div>
+                    <div><strong>Schedule: {{ athlete.athleteSchedule }}</strong></div>
                   </div>
                 </div>
               </li>
@@ -148,22 +144,20 @@
             @if (filteredUsers) {
               @for(filteredUser of filteredUsers; track filteredUser){
                 <li class="list-group-item">
-                  @if(filteredUser.flag == 'blue'){
-                    <strong style="color:blue">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
+                  @if(filteredUser.flag){
+                    <div>
+                      <strong [ngStyle]="{ 'color': getFlagColor(filteredUser.flag) }">
+                        {{ filteredUser.firstName }} {{ filteredUser.lastName }}
+                      </strong>
+                    </div>
                   }
-                  @if(filteredUser.flag == "green"){
-                    <strong style="color:green">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
-                  }
-                  @if(filteredUser.flag == "red"){
-                    <strong style="color:red">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
-                  }
-                  @if(filteredUser.flag == "orange"){
-                    <strong style="color:orange">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
-                  }
-                  <strong>{{ filteredUser.firstName }} {{ filteredUser.lastName }} </strong> 
-                  <span class="text-muted">({{ filteredUser.email }})</span> 
-                  <span class="text-info float-end">Created At: {{ filteredUser.createdAt}}</span>
-                </li>  
+                  <div>
+                    <strong>Email: {{ filteredUser.email }}</strong>
+                  </div>
+                  <div>
+                    <strong>Created At: {{ filteredUser.createdAt | date:'short' }}</strong>
+                  </div>
+                </li>
               }
               
             }
@@ -180,21 +174,20 @@
           <ul class="list-group">
             @for(filteredUser of filteredUsers; track filteredUser){
               <li class="list-group-item">
-                @if(filteredUser.flag == 'blue'){
-                  <strong style="color:blue">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
+                @if(filteredUser.flag){
+                  <div>
+                    <strong [ngStyle]="{ 'color': getFlagColor(filteredUser.flag) }">
+                      {{ filteredUser.firstName }} {{ filteredUser.lastName }}
+                    </strong>
+                  </div>
+                  
                 }
-                @if(filteredUser.flag == "green"){
-                  <strong style="color:green">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
-                }
-                @if(filteredUser.flag == "red"){
-                  <strong style="color:red">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
-                }
-                @if(filteredUser.flag == "orange"){
-                  <strong style="color:orange">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
-                }
-                <strong>{{ filteredUser.firstName }} {{ filteredUser.lastName }} </strong> 
-                <span class="text-muted">({{ filteredUser.email }})</span> 
-                <span class="text-info float-end">Created At: {{ filteredUser.createdAt}}</span>
+                <div>
+                  <strong>Email: {{ filteredUser.email }}</strong>
+                </div>
+                <div>
+                  <strong>Created At: {{ filteredUser.createdAt | date:'short' }}</strong>
+                </div>
               </li>  
             }
           </ul>
@@ -209,21 +202,20 @@
           <ul class="list-group">
             @for(filteredUser of filteredUsers; track filteredUser){
               <li class="list-group-item">
-                @if(filteredUser.flag == 'blue'){
-                  <strong style="color:blue">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
+                @if(filteredUser.flag){
+                  <div>
+                    <strong [ngStyle]="{ 'color': getFlagColor(filteredUser.flag) }">
+                      {{ filteredUser.firstName }} {{ filteredUser.lastName }}
+                    </strong>
+                  </div>
+                  
                 }
-                @if(filteredUser.flag == "green"){
-                  <strong style="color:green">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
-                }
-                @if(filteredUser.flag == "red"){
-                  <strong style="color:red">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
-                }
-                @if(filteredUser.flag == "orange"){
-                  <strong style="color:orange">{{ filteredUser.firstName }} {{ filteredUser.lastName }}</strong>
-                }
-                <strong>{{ filteredUser.firstName }} {{ filteredUser.lastName }} </strong> 
-                <span class="text-muted">({{ filteredUser.email }})</span> 
-                <span class="text-info float-end">Created At: {{ filteredUser.createdAt}}</span>
+                <div>
+                  <strong>Email: {{ filteredUser.email }}</strong>
+                </div>
+                <div>
+                  <strong>Created At: {{ filteredUser.createdAt | date:'short' }}</strong>
+                </div>
               </li>  
             }
           </ul>
@@ -244,9 +236,20 @@
         <ul class="list-group">
           @for(user of searchResults; track user){
             <li class="list-group-item">
-              <strong>{{ user.firstName }} {{ user.lastName }}</strong>
-              <span class="text-muted">({{ user.email }})</span>
-              <span class="text-info float-end">Created At: {{ user.createdAt | date:'short' }}</span>
+              @if(user.flag){
+                <div>
+                  <strong [ngStyle]="{ 'color': getFlagColor(user.flag) }">
+                    {{ user.firstName }} {{ user.lastName }}
+                  </strong>
+                </div>
+                
+              }
+              <div>
+                <strong>Email: {{ user.email }}</strong>
+              </div>
+              <div>
+                <strong>Created At: {{ user.createdAt | date:'short' }}</strong>
+              </div>
               @if(user.id){
                 <button class="btn btn-danger float-end" (click)="deleteUser(user.id)">Delete User</button>
               }
