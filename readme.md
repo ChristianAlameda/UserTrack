@@ -14,7 +14,7 @@ ng serve
 ## How to run back end
 ```
 cd demo
-mvn boot-strap:run
+mvn spring-boot:run
 ```
 
 ## Prerequisites
