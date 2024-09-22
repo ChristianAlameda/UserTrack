@@ -1,3 +1,4 @@
+add user_id to all of the dtos, and all of the get functions, and everything basically
 Be able to edit a user
 Edit a student
 Add a way to input your schedule
