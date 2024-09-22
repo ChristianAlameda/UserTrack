@@ -1,0 +1,78 @@
+@if (athlete) {
+  <div class="card mb-4">
+    <div class="card-body">
+      <h1 class="card-title">{{ athlete.firstName }} {{ athlete.lastName }}</h1>
+      @if (team) {
+        <h4 class="card-subtitle mb-2 text-muted">{{ team.teamName }}</h4>
+      } @else {
+        <h4 class="card-subtitle mb-2 text-muted">No Team</h4>
+      }
+      <ul class="list-group list-group-flush mt-3">
+        <li class="list-group-item">
+          <strong>Email:</strong> {{ athlete.email }}
+        </li>
+        <li class="list-group-item">
+          <strong>Speed:</strong> {{ athlete.speed }}
+        </li>
+        <li class="list-group-item">
+          <strong>Weight:</strong> {{ athlete.weight }}
+        </li>
+        <li class="list-group-item">
+          <strong>Height:</strong> {{ athlete.height }}
+        </li>
+        <li class="list-group-item">
+          <strong>Star Rating:</strong> {{ athlete.starRating }}
+        </li>
+        <li class="list-group-item">
+          <strong>Schedule:</strong> {{ athlete.athleteSchedule }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Display team members if the athlete is part of a team -->
+  @if (team) {
+    <h2 class="mt-4">Team Members of {{ team.teamName }}</h2>
+    <div class="row">
+      @for (teamMember of teamMembers; track teamMember) {
+        <div class="col-md-4">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">
+              <!-- flag thing -->
+              <strong [ngStyle]="{ 'color': utilService.getFlagColor(teamMember.flag) }">
+                {{ teamMember.firstName }} {{ teamMember.lastName }}
+              </strong><br />
+              </h5>
+              <p class="card-text">
+                
+                <strong>Email:</strong> {{ teamMember.email }}<br />
+                <strong>Speed:</strong> {{ teamMember.speed }}<br />
+                <strong>Height:</strong> {{ teamMember.height }}<br />
+                <strong>Weight:</strong> {{ teamMember.weight }}<br />
+                <strong>Star Rating:</strong> {{ teamMember.starRating }}<br />
+                <strong>Schedule:</strong> {{ teamMember.athleteSchedule }}
+              </p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+}
+
+@if (!team) {
+  <!-- Display all potential teams to join -->
+  <h2 class="mt-4">Teams To Join</h2>
+  <div class="list-group">
+    @for (team of teams; track team) {
+      <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+        {{ team.teamName }}
+        <span class="badge badge-primary badge-pill">{{ team.numUsers }} Users</span>
+        <button class="btn btn-sm btn-outline-success" (click)="addTeamMember(team.id)">
+          Join Team
+        </button>
+      </div>
+    }
+  </div>
+}

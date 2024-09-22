@@ -3,7 +3,17 @@
     <!-- List of All Users -->
     <div class="card mb-4">
       <div class="card-header">
-        <h2 class="h4">All {{AllOfWhichValue}}s</h2>
+        <h2 class="h4">All {{AllOfWhichValue}}s   
+          @if(AllOfWhichValue == "User"){
+            ( {{userCount}} )
+          }
+          @if(AllOfWhichValue == "Student"){
+            ( {{studentCount}} )
+          }
+          @if(AllOfWhichValue == "Athlete"){
+            ( {{athleteCount}} )
+          }
+        </h2>
       </div>
       <!-- User Type Selection Form -->
       <form>
@@ -37,7 +47,16 @@
                 @if(user.flag){
                   <div>
                     <strong [ngStyle]="{ 'color': getFlagColor(user.flag) }">
-                      {{ user.firstName }} {{ user.lastName }}
+                      @if(user.flag === 'green' || user.flag === 'orange'){
+                        <a [routerLink]="['/athlete', user.id]" >
+                          <strong [ngStyle]="{ 'color': getFlagColor(user.flag) }">
+                            {{ user.firstName }} {{ user.lastName }}
+                          </strong>
+                        </a>
+                      }
+                      @else {
+                        {{ user.firstName }} {{ user.lastName }}
+                      }
                     </strong>
                   </div>
                   

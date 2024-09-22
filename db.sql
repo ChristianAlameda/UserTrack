@@ -46,3 +46,23 @@ where u.id = a.user_id;
 select u.email, u.first_name, u.last_name, u.flag, s.class_name, s.grade, s.student_schedule, a.speed, a.height, a.weight, a.star_rating, a.athlete_schedule
 from users u, students s, athletes a
 where u.id = s.user_id = a.user_id;
+
+
+CREATE TABLE teams (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    team_name VARCHAR(255) NOT NULL,
+    num_users INT
+);
+
+CREATE TABLE teamMembers (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,  
+    team_id BIGINT NOT NULL,
+    CONSTRAINT fk_teamMembers_user_id
+        FOREIGN KEY (user_id) REFERENCES users(id)
+        ON DELETE CASCADE,
+    CONSTRAINT fk_teamMembers_team_id
+        FOREIGN KEY (team_id) REFERENCES teams(id)
+        ON DELETE CASCADE
+);
+

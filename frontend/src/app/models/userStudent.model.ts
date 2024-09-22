@@ -5,5 +5,5 @@ export interface UserStudent {
     flag?: string;
     className: String;
     grade: String;
-    studentSchedule: String;  // Use camelCase
+    studentSchedule: String;
 }

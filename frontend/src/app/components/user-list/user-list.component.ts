@@ -12,13 +12,12 @@ import { AthleteService } from '../../services/athlete.service';
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss'],
 })
 export class AppUserListComponent implements OnInit {
   allUsers: User[] = []; 
   filteredUsers: User[] = []; 
   user: User | null = null;
-  count: number = 0;
+  userCount: number = 0;
   lastName: string = '';
   searchResults: User[] = [];
   // For deciding what user to select for All section
@@ -82,7 +81,7 @@ export class AppUserListComponent implements OnInit {
   getAllUsers(): void {
     this.userService.getAllUsers().subscribe(data => {
       this.allUsers = data;
-      this.count = data.length;
+      this.userCount = data.length;
     });
   }
 
@@ -100,7 +99,7 @@ export class AppUserListComponent implements OnInit {
 
   getCountByLastName(lastName: string): void {
     this.userService.getCountOfLastName(lastName).subscribe(data => {
-      this.count = data;
+      this.userCount = data;
       this.lastName = lastName;
     });
   }

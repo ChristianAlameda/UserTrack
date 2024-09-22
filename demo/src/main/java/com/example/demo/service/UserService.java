@@ -32,9 +32,7 @@ public class UserService {
     @Autowired
     private AthleteRepository athleteRepository;
 
-    // GETTING 
-    // USERS
-
+    //============= GETTING ===================// 
     // USING
     public List<User> getAllUsers(){
         return userRepository.findAll();
@@ -56,9 +54,7 @@ public class UserService {
     }
 
     // USING
-    public List<User> findByEmail(String email){
-        List<User> usersByEmail =  userRepository.findByEmail(email);
-        
+    public List<User> findByEmail(String email){        
         return userRepository.findByEmail(email);
     }
     
@@ -87,49 +83,34 @@ public class UserService {
 
 
     //============== Adding Users, Students, StudentAthletes ==============//
+    // USING
     public User addUser(User user){
         return userRepository.save(user);
     }
 
-    @Transactional  // Ensures both user and student are saved together or rolled back in case of an error
+    // USING
+    @Transactional  
     public void addUserStudent(User user, Student student) {
-        // Step 1: Save the user
         User savedUser = userRepository.save(user);
-
-        // Step 2: Set the userId for the student
         student.setUserId(savedUser.getId());
-
-        // Step 3: Save the student
         studentRepository.save(student);
     }
 
-    @Transactional  // Ensures both user and student are saved together or rolled back in case of an error
+    // USING
+    @Transactional  
     public void addUserAthlete(User user, Athlete athlete) {
-        // Step 1: Save the user
         User savedUser = userRepository.save(user);
-
-        // Step 2: Set the userId for the student
         athlete.setUserId(savedUser.getId());
-
-        // Step 3: Save the student
         athleteRepository.save(athlete);
     }
 
-    @Transactional  // Ensures both user and student are saved together or rolled back in case of an error
+    // USING
+    @Transactional  
     public void addUserStudentAthlete(User user, Student student, Athlete athlete) {
-        // Step 1: Save the user
         User savedUser = userRepository.save(user);
-
-        // Step 2: Set the userId for the student
         student.setUserId(savedUser.getId());
-
-        // Step 3: Save the student
         studentRepository.save(student);
-
-        // Step 2: Set the userId for the athlete
         athlete.setUserId(savedUser.getId());
-
-        // Step 3: Save the athlete
         athleteRepository.save(athlete);
     }
 
@@ -138,11 +119,12 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    // USING
     public void deleteUserByEmail(String email){
         userRepository.deleteUserByEmail(email);
     }
 
-    //==================== ETC ===================//
+    //==================== ETC ============================//
     public long countByLastName(String lastName){
         return userRepository.countByLastName(lastName);
     }

@@ -7,10 +7,12 @@ import { AppUserListComponent } from './components/user-list/user-list.component
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AthleteComponent } from './components/athlete/athlete.component';
 @NgModule({
   declarations: [
     AppComponent,
     AppUserListComponent,
+    AthleteComponent,
   ],
   imports: [
     BrowserModule,
