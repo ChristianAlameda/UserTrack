@@ -22,7 +22,7 @@ public interface TeamMemberRepository extends JpaRepository<TeamMember,Long>{
 
     @Query("SELECT new com.example.demo.entity.DTOs.UserAthleteDTO(" +
        "u.email, u.firstName, u.lastName, u.flag, " +
-       "a.speed, a.height, a.weight, a.starRating, a.athleteSchedule) " +
+       "a.userId, a.speed, a.height, a.weight, a.starRating, a.athleteSchedule) " +
        "FROM TeamMember tm " +
        "JOIN Athlete a ON tm.userId = a.userId " +
        "JOIN User u ON a.userId = u.id " +

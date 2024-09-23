@@ -1,4 +1,8 @@
 @if (athlete) {
+  <div class="mb-4">
+    <button class="btn btn-primary" [routerLink]="['/']">Go Back to Home</button>
+  </div>
+  
   <div class="card mb-4">
     <div class="card-body">
       <h1 class="card-title">{{ athlete.firstName }} {{ athlete.lastName }}</h1>
@@ -39,13 +43,15 @@
           <div class="card mb-3">
             <div class="card-body">
               <h5 class="card-title">
-              <!-- flag thing -->
-              <strong [ngStyle]="{ 'color': utilService.getFlagColor(teamMember.flag) }">
-                {{ teamMember.firstName }} {{ teamMember.lastName }}
-              </strong><br />
+                <strong [ngStyle]="{ 'color': utilService.getFlagColor(teamMember.flag) }">
+                  <a [routerLink]="['/athlete', teamMember.userId]">
+                    <strong [ngStyle]="{ 'color': getFlagColor(teamMember.flag) }">
+                      {{ teamMember.firstName }} {{ teamMember.lastName }}
+                    </strong>
+                  </a>
+                </strong><br />
               </h5>
               <p class="card-text">
-                
                 <strong>Email:</strong> {{ teamMember.email }}<br />
                 <strong>Speed:</strong> {{ teamMember.speed }}<br />
                 <strong>Height:</strong> {{ teamMember.height }}<br />

@@ -8,6 +8,7 @@ public class UserAthleteDTO {
     private String flag; // adding it
 
     // Athlete
+    private Long userId; // Adding userId
     private int speed;
     private int height;
     private int weight;
@@ -21,6 +22,9 @@ public class UserAthleteDTO {
         String firstName,
         String lastName,
         String flag,
+        
+        
+        Long userId, // Added userId
         int speed,
         int height,
         int weight,
@@ -31,6 +35,9 @@ public class UserAthleteDTO {
         this.firstName = firstName;
         this.lastName = lastName;
         this.flag = flag;
+        
+        
+        this.userId = userId; // Initialize userId
         this.speed = speed;
         this.height = height;
         this.weight = weight;
@@ -39,6 +46,14 @@ public class UserAthleteDTO {
     }
 
     // Getters and Setters
+    public Long getUserId() { // Added getter for userId
+        return userId;
+    }
+
+    public void setUserId(Long userId) { // Added setter for userId
+        this.userId = userId;
+    }
+
     public String getEmail() {
         return email;
     }

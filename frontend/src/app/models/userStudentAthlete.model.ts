@@ -6,6 +6,8 @@ export interface UserStudentAthlete {
     className: string;
     grade: string;
     studentSchedule: string;
+
+    userId?:number;
     speed: number;
     height: number;
     weight: number;

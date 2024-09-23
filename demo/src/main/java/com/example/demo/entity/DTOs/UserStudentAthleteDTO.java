@@ -4,10 +4,13 @@ public class UserStudentAthleteDTO {
     private String email;
     private String firstName;
     private String lastName;
-    private String flag; //adding it
+    private String flag; // adding it
+
     private String className;
     private String grade;
     private String studentSchedule; 
+
+    private Long userId; // Adding userId
     private int speed;
     private int height;
     private int weight;
@@ -21,22 +24,24 @@ public class UserStudentAthleteDTO {
         String firstName,
         String lastName,
         String flag,
-
+        
         String className,
         String grade,
         String studentSchedule,
 
+        Long userId, // Added userId
         int speed,
         int height,
         int weight,
         int starRating,
         String athleteSchedule
     ) {
+        this.userId = userId; // Initialize userId
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.className = className;
         this.flag = flag;
+        this.className = className;
         this.grade = grade;
         this.studentSchedule = studentSchedule;
         this.speed = speed;
@@ -47,6 +52,14 @@ public class UserStudentAthleteDTO {
     }
 
     // Getters and Setters
+    public Long getUserId() { // Added getter for userId
+        return userId;
+    }
+
+    public void setUserId(Long userId) { // Added setter for userId
+        this.userId = userId;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -71,11 +84,11 @@ public class UserStudentAthleteDTO {
         this.lastName = lastName;
     }
 
-    public String getFlag(){
+    public String getFlag() {
         return flag;
     }
 
-    public void setFlag(String flag){
+    public void setFlag(String flag) {
         this.flag = flag;
     }
 

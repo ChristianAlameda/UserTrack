@@ -8,6 +8,7 @@ public class UserStudentDTO {
     private String className;
     private String grade;
     private String studentSchedule;
+    private Long userId;
 
     public UserStudentDTO() {}
 
@@ -17,6 +18,7 @@ public class UserStudentDTO {
         String lastName,
         String flag,
 
+        Long userId, // Adding userId
         String className,
         String grade,
         String studentSchedule
@@ -25,6 +27,8 @@ public class UserStudentDTO {
         this.firstName = firstName;
         this.lastName = lastName;
         this.flag = flag;
+
+        this.userId = userId; // Adding userId
         this.className = className;
         this.grade = grade;
         this.studentSchedule = studentSchedule;
@@ -61,6 +65,14 @@ public class UserStudentDTO {
 
     public void setFlag(String flag){
         this.flag = flag;
+    }
+
+    public Long getUserId(){
+        return userId;
+    }
+
+    public void setUserId(Long userId){
+        this.userId = userId;
     }
 
     public String getClassName() {

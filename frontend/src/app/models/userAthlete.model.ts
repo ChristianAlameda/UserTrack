@@ -3,6 +3,8 @@ export interface UserAthlete {
     lastName: string;
     email: string;
     flag?: string;
+
+    userId?:number;
     speed: number;
     height: number;
     weight: number;

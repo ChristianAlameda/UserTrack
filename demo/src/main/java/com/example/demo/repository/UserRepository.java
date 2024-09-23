@@ -47,18 +47,24 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // Count the number of users with a specific last name
     long countByLastName(String lastName);
 
-    @Query("select new com.example.demo.entity.DTOs.UserStudentDTO(u.email, u.firstName, u.lastName, u.flag, s.className, s.grade, s.studentSchedule) " +
-       "from User u join Student s on u.id = s.userId")
+    @Query("select new com.example.demo.entity.DTOs.UserStudentDTO( "+
+        "u.email, u.firstName, u.lastName, u.flag, "+
+        "s.userId, s.className, s.grade, s.studentSchedule) " +
+        "from User u join Student s on u.id = s.userId")
     List<UserStudentDTO> getAllStudents();
 
 
-    @Query("select new com.example.demo.entity.DTOs.UserAthleteDTO(u.email, u.firstName, u.lastName, u.flag, a.speed, a.height, a.weight, a.starRating, a.athleteSchedule) " +
+    @Query("select new com.example.demo.entity.DTOs.UserAthleteDTO( " +
+        "u.email, u.firstName, u.lastName, u.flag, " +
+        "a.userId, a.speed, a.height, a.weight, a.starRating, a.athleteSchedule) " +
         "from User u join Athlete a on u.id = a.userId")
     List<UserAthleteDTO> getAllAthletes();
 
 
-    @Query("select new com.example.demo.entity.DTOs.UserStudentAthleteDTO(u.email, u.firstName, u.lastName, u.flag, s.className, s.grade, s.studentSchedule, " +
-        "a.speed, a.height, a.weight, a.starRating, a.athleteSchedule) " +
+    @Query("select new com.example.demo.entity.DTOs.UserStudentAthleteDTO( " +
+        "u.email, u.firstName, u.lastName, u.flag, "+
+        "s.className, s.grade, s.studentSchedule, " +
+        "a.userId, a.speed, a.height, a.weight, a.starRating, a.athleteSchedule) " +
         "from User u join Student s on u.id = s.userId " +
         "join Athlete a on u.id = a.userId")
     List<UserStudentAthleteDTO> getAllStudentAthletes();
