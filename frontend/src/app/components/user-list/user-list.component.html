@@ -1,17 +1,17 @@
 <div class="container my-5">
     <h1 class="text-center mb-4">User Management</h1>
-    <!-- List of All Users -->
+    <!-- GET ALL OF USERS< STUDENTS< ATHLETES -->
     <div class="card mb-4">
       <div class="card-header">
-        <h2 class="h4">All {{AllOfWhichValue}}s   
+        <h2 class="h4">All 
           @if(AllOfWhichValue == "User"){
-            ( {{userCount}} )
+            {{AllOfWhichValue}}s ({{userCount}})
           }
           @if(AllOfWhichValue == "Student"){
-            ( {{studentCount}} )
+            {{AllOfWhichValue}}s({{studentCount}})
           }
           @if(AllOfWhichValue == "Athlete"){
-            ( {{athleteCount}} )
+            {{AllOfWhichValue}}s({{athleteCount}})
           }
         </h2>
       </div>
@@ -38,7 +38,7 @@
         </div>
       </form>
 
-      <!-- All of Users -->
+      <!-- GET All of Users -->
       @if(AllOfWhichValue == "User"){
         <div class="card-body">
           <ul class="list-group">
@@ -74,16 +74,25 @@
         <button class="btn btn-primary" (click)="getAllUsers()">Refresh Users</button>
       }
 
-      <!-- All of Students -->
+      <!-- GET All of Students -->
       @if(AllOfWhichValue == "Student"){
         <div class="card-body">
           <ul class="list-group">
             @for(student of allStudents; track student){
               <li class="list-group-item">
                 @if(student.flag){
-                  <strong [ngStyle]="{ 'color': getFlagColor(student.flag) }">
-                    {{ student.firstName }} {{ student.lastName }}
-                  </strong>
+                      @if(student.flag === 'green' || student.flag === 'orange'){
+                        <a [routerLink]="['/athlete', student.userId]" >
+                          <strong [ngStyle]="{ 'color': getFlagColor(student.flag) }">
+                            {{ student.firstName }} {{ student.lastName }}
+                          </strong>
+                        </a>
+                      }
+                      @else {
+                        <strong [ngStyle]="{ 'color': getFlagColor(student.flag) }">
+                          {{ student.firstName }} {{ student.lastName }}
+                        </strong>
+                      }
                 }
                 <br>
                 <strong>
@@ -97,7 +106,7 @@
         <button class="btn btn-primary" (click)="getAllStudents()">Refresh Users</button>
       }
 
-      <!-- All of Athletes -->
+      <!-- GET All of Athletes -->
       @if(AllOfWhichValue == "Athlete"){
         <div class="card-body">
           <ul class="list-group">
@@ -105,9 +114,18 @@
               <li class="list-group-item d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
                   @if(athlete.flag){
-                    <strong [ngStyle]="{ 'color': getFlagColor(athlete.flag) }">
-                      {{ athlete.firstName }} {{ athlete.lastName }}
-                    </strong>
+                      @if(athlete.flag === 'green' || athlete.flag === 'orange'){
+                        <a [routerLink]="['/athlete', athlete.userId]" >
+                          <strong [ngStyle]="{ 'color': getFlagColor(athlete.flag) }">
+                            {{ athlete.firstName }} {{ athlete.lastName }}
+                          </strong>
+                        </a>
+                      }
+                      @else {
+                        <strong [ngStyle]="{ 'color': getFlagColor(athlete.flag) }">
+                          {{ athlete.firstName }} {{ athlete.lastName }}
+                        </strong>
+                      }
                   }
                   <div>
                     <div><strong>Speed: {{ athlete.speed }}</strong></div>
@@ -125,12 +143,16 @@
       }
     </div>
 
-    <!-- Get user by Email Or Date -->
+    <!-- Get user BY EMAIL, DATE, NAME -->
     <div class="card mb-4">
       <div class="card-header">
-        <h2 class="h4">Get User By {{emailOrDateValue}}</h2>
+        <h2 class="h4">Get User By {{emailOrDateValue}}
+          @if(emailOrDateValue === "Date" || emailOrDateValue === "Email" || emailOrDateValue === "Name"){
+            ({{filteredUsers.length}})
+          }
+        </h2>
       </div>
-      <!-- Email or Date Selection Form -->
+      <!-- Email Date or Name Selection Form -->
       <form>
         <div class="mb-3">
           <div class="form-check">
@@ -245,7 +267,11 @@
     <!-- Delete Users -->
     <div class="card mb-4">
       <div class="card-header">
-        <h2 class="h4">Delete Users</h2>
+        <h2 class="h4">Delete Users
+          @if(searchResults.length > 0){
+            ({{searchResults.length}})
+          }
+        </h2>
       </div>
       <div class="card-body">
         <div class="input-group mb-3">

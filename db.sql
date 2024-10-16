@@ -33,17 +33,17 @@ CREATE TABLE athletes (
 
 
 -- Grabbing Student
-select u.email, u.first_name, u.last_name, u.flag, s.class_name, s.grade, s.student_schedule
+select u.email, u.first_name, u.last_name, u.flag, s.user_id, s.class_name, s.grade, s.student_schedule
 from users u, students s
 where u.id = s.user_id;
 
 -- Grabbing Athlete
-select u.email, u.first_name, u.last_name, u.flag, a.speed, a.height, a.weight, a.star_rating, a.athlete_schedule
+select u.email, u.first_name, u.last_name, u.flag, a.user_id a.speed, a.height, a.weight, a.star_rating, a.athlete_schedule
 from users u, athletes a 
 where u.id = a.user_id;
 
 -- Grabbing StudentAthletes
-select u.email, u.first_name, u.last_name, u.flag, s.class_name, s.grade, s.student_schedule, a.speed, a.height, a.weight, a.star_rating, a.athlete_schedule
+select u.email, u.first_name, u.last_name, u.flag, s.class_name, s.grade, s.student_schedule, a.user_id, a.speed, a.height, a.weight, a.star_rating, a.athlete_schedule
 from users u, students s, athletes a
 where u.id = s.user_id = a.user_id;
 
